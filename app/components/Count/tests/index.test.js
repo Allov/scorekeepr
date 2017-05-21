@@ -15,16 +15,16 @@ describe('<Count />', () => {
 
   it('should render with a .positive className when receiving positive value prop', () => {
     const renderedComponent = renderComponent({ value: 1 });
-    expect(renderedComponent.find('p').prop('className')).toMatch(/positive/);
+    expect(renderedComponent.find('p').prop('className')).toMatch(/text-success/);
   });
 
   it('should render with a .negative className when receiving negative value prop', () => {
     const renderedComponent = renderComponent({ value: -1 });
-    expect(renderedComponent.find('p').prop('className')).toMatch(/negative/);
+    expect(renderedComponent.find('p').prop('className')).toMatch(/text-danger/);
   });
 
   it('should not render a .negative or .positive className when receiving a neutral value prop', () => {
     const renderedComponent = renderComponent({ value: 0 });
-    expect(renderedComponent.find('p').prop('className')).toMatch(/[^(negative|positive)]/);
+    expect(renderedComponent.find('p').prop('className')).toMatch(/[^(text\-danger|text\-success)]/);
   });
 });
