@@ -1,0 +1,21 @@
+/*
+ * HomePage Messages
+ *
+ * This contains all the text for the HomePage component.
+ */
+import { defineMessages } from 'react-intl';
+
+export default defineMessages({
+  header: {
+    id: 'app.components.App.header',
+    defaultMessage: 'scorekeepr',
+  },
+  github: {
+    id: 'app.components.App.github',
+    defaultMessage: 'Follow us on github',
+  },
+  twitter: {
+    id: 'app.components.App.twitter',
+    defaultMessage: 'Follow us on twitter',
+  },
+});

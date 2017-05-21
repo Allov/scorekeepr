@@ -32,8 +32,4 @@ export default defineMessages({
     id: 'app.components.PlayerList.playerNamePlaceholder',
     defaultMessage: 'player name',
   },
-  gameNamePlaceholder: {
-    id: 'app.components.PlayerList.gameNamePlaceholder',
-    defaultMessage: 'game name',
-  },
 });
