@@ -7,7 +7,6 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { browserHistory } from 'react-router';
 import { injectIntl, intlShape } from 'react-intl';
 import { Tabs, Tab, Button } from 'react-bootstrap';
 import styled from 'styled-components';
