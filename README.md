@@ -2,7 +2,26 @@
 
 This application will help you share and keep the score of any game where you have to add or substract points. Originally, I made this app for the card game [Release!](http://inedo.com/release), but I decided to generalise it a bit as it can be useful for any kind of game (e.g.: Scrabble, random hockey game, anything where you need to add and substract points from player or teams, really).
 
-# todo
+<div align="center">
+  <!-- Dependency Status -->
+  <a href="https://david-dm.org/react-boilerplate/react-boilerplate">
+    <img src="https://david-dm.org/react-boilerplate/react-boilerplate.svg" alt="Dependency Status" />
+  </a>
+  <!-- devDependency Status -->
+  <a href="https://david-dm.org/react-boilerplate/react-boilerplate#info=devDependencies">
+    <img src="https://david-dm.org/react-boilerplate/react-boilerplate/dev-status.svg" alt="devDependency Status" />
+  </a>
+  <!-- Build Status -->
+  <a href="https://travis-ci.org/react-boilerplate/react-boilerplate">
+    <img src="https://travis-ci.org/react-boilerplate/react-boilerplate.svg" alt="Build Status" />
+  </a>
+  <!-- Test Coverage -->
+  <a href="https://coveralls.io/r/react-boilerplate/react-boilerplate">
+    <img src="https://coveralls.io/repos/github/react-boilerplate/react-boilerplate/badge.svg" alt="Test Coverage" />
+  </a>
+</div>
+
+# todos
 
 ## next steps
 
