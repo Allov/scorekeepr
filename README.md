@@ -7,6 +7,10 @@ This application will help you share and keep the score of any game where you ha
   <a href="https://travis-ci.org/Allov/scorekeepr">
     <img src="https://travis-ci.org/Allov/scorekeepr.svg" alt="Build Status" />
   </a>
+  <!-- Test Coverage -->
+  <a href="https://coveralls.io/r/Allov/scorekeepr">
+    <img src="https://coveralls.io/repos/github/Allov/scorekeepr/badge.svg" alt="Test Coverage" />
+  </a>
 </div>
 
 # todos
