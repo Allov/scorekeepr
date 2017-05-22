@@ -4,8 +4,8 @@ This application will help you share and keep the score of any game where you ha
 
 <div align="center">
   <!-- Build Status -->
-  <a href="https://travis-ci.org/allov/scorekeepr">
-    <img src="https://travis-ci.org/allov/scorekeepr.svg" alt="Build Status" />
+  <a href="https://travis-ci.org/Allov/scorekeepr">
+    <img src="https://travis-ci.org/Allov/scorekeepr.svg" alt="Build Status" />
   </a>
 </div>
 
