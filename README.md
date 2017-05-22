@@ -6,14 +6,15 @@ This application will help you share and keep the score of any game where you ha
 
 ## next steps
 
-* implement redux
-* update score (counter and hard set)
+* (done) implement redux
+* (done) rest api
+* (in progress) update score (counter and hard set)
+* global loading solution
 * reset scores
 * reset game
 * remove a player (edit mode)
 * tabs should create history to use browser back feature
 * mongodb
-* rest api
 * websockets for viewers
 * general github setup
   * build statuses
@@ -63,6 +64,10 @@ This application will help you share and keep the score of any game where you ha
 * event log
   * log all actions (using redux state?)
   * display notifications
+* events
+  * new leader
+  * phase started / ended
+  * game started / ended
 * game templates
   * be able to setup game default structure
   * set default increment value
@@ -70,8 +75,8 @@ This application will help you share and keep the score of any game where you ha
 * light and dark theme
 * think about landscape mode? should it be any different?
 * associate image with a player (team logo, sponsors, profile picture)
-  * implement email linking to get a profile picture?
-  * random image generated from name?
+  * implement email linking to get a profile picture? (gravatar)
+  * random image generated from name? (http://identicon.net/)
 * join a game as a player
   * as admin, send an invite and have player enter their informations
 
@@ -81,6 +86,13 @@ This application will help you share and keep the score of any game where you ha
 * custom theming (custom events, sponsorship)
 * be able to share a static version as facebook post / twitter cards
 * feed event log from different sources (twitter, facebook, slack, etc.)
+
+## general todos
+
+* Terms and Conditions
+* Google Analytics
+* Sitemap
+* FAQ
 
 ## general site structure
 

@@ -8,6 +8,14 @@ import { defineMessages } from 'react-intl';
 export default defineMessages({
   header: {
     id: 'app.components.NotFoundPage.header',
-    defaultMessage: 'This is NotFoundPage component!',
+    defaultMessage: 'wooops... 404 :(',
+  },
+  description: {
+    id: 'app.components.NotFoundPage.description',
+    defaultMessage: 'The page was not found, but you could always: ',
+  },
+  createGame: {
+    id: 'app.components.NotFoundPage.createGame',
+    defaultMessage: 'Create a game',
   },
 });

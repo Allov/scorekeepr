@@ -11,15 +11,20 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { Link } from 'react-router';
 
 import messages from './messages';
 
 export default class NotFound extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
+      <div className="jumbotron">
+        <h1>
+          <FormattedMessage {...messages.header} />
+        </h1>
+        <p className="text-center"><FormattedMessage {...messages.description} /></p>
+        <p className="text-center"><Link to="/games/admin" className="btn btn-primary"><FormattedMessage {...messages.createGame} /></Link></p>
+      </div>
     );
   }
 }

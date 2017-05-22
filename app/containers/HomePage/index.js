@@ -9,27 +9,66 @@
  * the linting exception.
  */
 
-import React from 'react';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { Link } from 'react-router';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { Button } from 'react-bootstrap';
+import { browserHistory } from 'react-router';
+
+import { makeSelectGameId, makeSelectHomeCreating, makeSelectHomeError } from './selectors';
+import { createGame } from './actions';
 import messages from './messages';
 
-class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     intl: intlShape.isRequired,
+    loading: PropTypes.bool,
+    error: React.PropTypes.oneOfType([
+      React.PropTypes.object,
+      React.PropTypes.bool,
+    ]),
+    onCreateGame: PropTypes.func,
+  }
+
+  componentWillReceiveProps(newProps) {
+    const { gameId } = newProps;
+
+    if (gameId) {
+      browserHistory.push(`/games/${gameId}/admin/`);
+    }
   }
 
   render() {
     const { formatMessage } = this.props.intl;
+
+    let error = null;
+    if (this.props.error) {
+      error = <p className="text-danger">Oops... Something went wrong!</p>;
+    }
+
     return (
       <div className="jumbotron text-center">
         <h1><FormattedMessage {...messages.header} /></h1>
         <p><FormattedMessage {...messages.description} /></p>
-        <Link to="/games/admin" className="btn btn-primary" title={formatMessage(messages.create)}><FormattedMessage {...messages.create} /></Link>
+        <Button bsStyle="primary" disabled={this.props.loading} title={formatMessage(messages.create)} onClick={this.props.onCreateGame}><FormattedMessage {...messages.create} /></Button>
+        {error}
       </div>
     );
   }
 }
 
-export default injectIntl(HomePage);
+export function mapDispatchToProps(dispatch) {
+  return {
+    onCreateGame: () => dispatch(createGame()),
+  };
+}
+
+const mapStateToProps = createStructuredSelector({
+  loading: makeSelectHomeCreating(),
+  error: makeSelectHomeError(),
+  gameId: makeSelectGameId(),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(HomePage));

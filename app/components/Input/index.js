@@ -29,8 +29,8 @@ const StyledFormControl = styled(FormControl)`
 `;
 
 const Input = (props) => (
-  <FormGroup className="pull-left">
-    <StyledFormControl type="text" onFocus={selectAllText} {...props} />
+  <FormGroup className="pull-left" {...props}>
+    <StyledFormControl onFocus={selectAllText} {...props} />
   </FormGroup>
 );
 

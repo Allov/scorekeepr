@@ -3,7 +3,6 @@ import React, { PropTypes } from 'react';
 import Input from 'components/Input';
 
 import StyledCount from './StyledCount';
-import StyledFormControl from './StyledFormControl';
 
 class Count extends React.Component {
   constructor() {
@@ -39,10 +38,8 @@ class Count extends React.Component {
           <StyledCount className={`text-center ${className}`} onClick={this.toggleEditMode}>
             {value}
           </StyledCount>
-        ) : (
-            <StyledFormControl>
-              <Input inputMode="numeric" onBlur={this.toggleEditMode} autoFocus value={this.props.value} onChange={this.props.onValueChangedHandler} />
-            </StyledFormControl>
+          ) : (
+            <Input type="tel" className="text-center" onBlur={this.toggleEditMode} autoFocus value={this.props.value} onChange={this.props.onValueChangedHandler} />
           )
         }
       </div>

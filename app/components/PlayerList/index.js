@@ -19,10 +19,10 @@ class PlayerList extends React.Component {
   }
 
   render() {
-    let tbody = null;
+    let playerListtbody = null;
     const { formatMessage } = this.props.intl;
     if (this.props.players && this.props.players.length > 0) {
-      tbody = (
+      playerListtbody = (
         <tbody>
           {this.props.players.map((player, i) => (
             <Player
@@ -64,7 +64,7 @@ class PlayerList extends React.Component {
               <th className="text-center"><FormattedMessage {...messages.score} /></th>
             </tr>
           </thead>
-          {tbody}
+          {playerListtbody}
         </table>
         {noPlayers}
       </Wrapper>
