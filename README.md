@@ -27,16 +27,19 @@ Want to [contibute](.github/CONTRIBUTING.md)?
 
 ## next steps
 
-* (done) implement redux
-* (done) rest api
-* (done) mongodb
-* (in progress) viewer's view using the shareId
+- [x] implement redux
+- [x] rest api
+
+
+
+* [x] mongodb
+* [ ] viewer's view using the shareId
   * needs refactoring, did this too quickly
-* (in progress) update score (counter and hard set)
+* [ ] update score (counter and hard set)
   * rough is made, need to update player name and hard set the score
-* (in progress) general error handling
+* [ ] general error handling
   * need to centralize this stuff in the App container
-* (in progress) general github setup
+* [ ] general github setup
   * build statuses
     * travis works
     * coveralls.io is set, but doesn't seem to pickup the repo... to investigate
