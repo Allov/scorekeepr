@@ -6,15 +6,25 @@ import {
   LOAD_GAME_NOT_FOUND,
   LOAD_GAME_FORBIDDEN,
   LOAD_GAME_ERROR,
+  ADD_PLAYER,
+  INCREMENT_PLAYER,
+  DECREMENT_PLAYER,
 } from './constants';
 
 const initialState = fromJS({
-  game: false,
+  game: {
+    players: [],
+  },
   loading: false,
   notFound: false,
   unauthorized: false,
   error: false,
+  defaultIncrement: 1,
 });
+
+function applyIncrement(players, increment) {
+
+}
 
 function homeReducer(state = initialState, action) {
   switch (action.type) {
@@ -25,7 +35,7 @@ function homeReducer(state = initialState, action) {
         .set('error', false);
     case LOAD_GAME_SUCCESS:
       return state
-        .set('game', action.game)
+        .set('game', fromJS(action.game))
         .set('loading', false)
         .set('error', false);
     case LOAD_GAME_NOT_FOUND:
@@ -43,6 +53,15 @@ function homeReducer(state = initialState, action) {
         .set('game', false)
         .set('loading', false)
         .set('error', action.error);
+    case ADD_PLAYER:
+      return state
+        .updateIn(['game', 'players'], (players) => players.push(fromJS({ score: 0 })));
+    case INCREMENT_PLAYER:
+      return state
+        .updateIn(['game', 'players'], (players) => players.update(action.index, (p) => p.set('score', p.get('score') + state.get('defaultIncrement'))));
+    case DECREMENT_PLAYER:
+      return state
+        .updateIn(['game', 'players'], (players) => players.update(action.index, (p) => p.set('score', p.get('score') - state.get('defaultIncrement'))));
     default:
       return state;
   }

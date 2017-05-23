@@ -9,7 +9,7 @@ const makeSelectGameId = () => createSelector(
 
 const makeSelectGame = () => createSelector(
   selectGameAdmin,
-  (state) => state.get('game'),
+  (state) => state.get('game').toJS(),
 );
 
 const makeSelectGameLoading = () => createSelector(

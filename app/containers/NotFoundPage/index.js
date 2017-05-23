@@ -23,7 +23,7 @@ export default class NotFound extends React.PureComponent { // eslint-disable-li
           <FormattedMessage {...messages.header} />
         </h1>
         <p className="text-center"><FormattedMessage {...messages.description} /></p>
-        <p className="text-center"><Link to="/games/admin" className="btn btn-primary"><FormattedMessage {...messages.createGame} /></Link></p>
+        <p className="text-center"><Link to="/" className="btn btn-primary"><FormattedMessage {...messages.createGame} /></Link></p>
       </div>
     );
   }

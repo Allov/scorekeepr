@@ -20,6 +20,9 @@ This application will help you share and keep the score of any game where you ha
 * (done) implement redux
 * (done) rest api
 * (in progress) update score (counter and hard set)
+* (in progress) general error handling
+* dev mode (log and stuff)
+  * log to file (prod)
 * global loading solution
 * reset scores
 * reset game

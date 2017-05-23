@@ -5,9 +5,19 @@ import { scorekeeprApiBaseUrl } from 'utils/globalConfig';
 import request from 'utils/request';
 
 import { gameLoaded, gameNotFound, gameLoadingError } from './actions';
-import { LOAD_GAME } from './constants';
+import { LOAD_GAME, ADD_PLAYER, INCREMENT_PLAYER, DECREMENT_PLAYER } from './constants';
 
-import { makeSelectGameId } from './selectors';
+import { makeSelectGameId, makeSelectGame } from './selectors';
+
+function* handleError(err) {
+  console.log(err); // eslint-disable-line no-console
+
+  if (err.response && err.response.status === 404) {
+    yield put(gameNotFound());
+  }
+
+  yield put(gameLoadingError(err));
+}
 
 export function* loadGame() {
   const gameId = yield select(makeSelectGameId());
@@ -18,22 +28,38 @@ export function* loadGame() {
 
     yield put(gameLoaded(game));
   } catch (err) {
-    if (err.response.status === 404) {
-      yield put(gameNotFound());
-    }
-
-    yield put(gameLoadingError(err));
+    handleError(err);
   }
 }
 
-/**
- * Root saga manages watcher lifecycle
- */
-export function* createGameRoot() {
-  // Watches for LOAD_REPOS actions and calls getRepos when one comes in.
-  // By using `takeLatest` only the result of the latest API call is applied.
-  // It returns task descriptor (just like fork) so we can continue execution
+export function* loadGameRoot() {
   const watcher = yield takeLatest(LOAD_GAME, loadGame);
+
+  // Suspend execution until location changes
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
+}
+
+export function* updateGame() {
+  const game = yield select(makeSelectGame());
+  const requestURL = `${scorekeeprApiBaseUrl}api/games/${game.id}`;
+
+  try {
+    // PUT the whole game object to the game ressource.
+    yield call(request, requestURL, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'PUT',
+      body: JSON.stringify(game),
+    });
+  } catch (err) {
+    handleError(err);
+  }
+}
+
+export function* updateGameRoot() {
+  const watcher = yield takeLatest([ADD_PLAYER, INCREMENT_PLAYER, DECREMENT_PLAYER], updateGame);
 
   // Suspend execution until location changes
   yield take(LOCATION_CHANGE);
@@ -42,5 +68,6 @@ export function* createGameRoot() {
 
 // Bootstrap sagas
 export default [
-  createGameRoot,
+  loadGameRoot,
+  updateGameRoot,
 ];

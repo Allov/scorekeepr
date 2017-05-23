@@ -36,6 +36,6 @@ describe('<PlayerList />', () => {
       </IntlProvider>
     );
 
-    expect(renderedComponent.find('Player').length).toBeGreaterThan(0);
+    expect(renderedComponent.find('input').length).toBeGreaterThan(0);
   });
 });

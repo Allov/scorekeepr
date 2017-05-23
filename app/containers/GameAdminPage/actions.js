@@ -4,6 +4,9 @@ import {
   LOAD_GAME_NOT_FOUND,
   LOAD_GAME_FORBIDDEN,
   LOAD_GAME_ERROR,
+  ADD_PLAYER,
+  INCREMENT_PLAYER,
+  DECREMENT_PLAYER,
 } from './constants';
 
 export function loadGame(gameId) {
@@ -36,5 +39,23 @@ export function gameLoadingError(error) {
   return {
     type: LOAD_GAME_ERROR,
     error,
+  };
+}
+
+export function gameAddPlayer() {
+  return {
+    type: ADD_PLAYER,
+  };
+}
+
+export function gameIncrementPlayer() {
+  return {
+    type: INCREMENT_PLAYER,
+  };
+}
+
+export function gameDecrementPlayer() {
+  return {
+    type: DECREMENT_PLAYER,
   };
 }

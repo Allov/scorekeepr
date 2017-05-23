@@ -14,8 +14,9 @@ import FontAwesome from 'react-fontawesome';
 
 import LoadingPanel from 'components/LoadingPanel';
 import PlayerList from 'components/PlayerList';
+import NotFoundPage from 'containers/NotFoundPage';
 
-import { loadGame } from './actions';
+import { loadGame, gameAddPlayer, gameIncrementPlayer, gameDecrementPlayer } from './actions';
 
 import Buttons from './Buttons';
 import messages from './messages';
@@ -28,6 +29,22 @@ const GameTitle = styled.h1`
   font-weight: bold;
 `;
 
+export const bindIndexToActionCreator =
+  (actionCreator, index) =>
+    (...args) =>
+      Object.assign(actionCreator(...args), { index });
+
+const playerDispatchProperties =
+  (index) =>
+    (dispatch) => ({
+      onAddHandler() {
+        dispatch(bindIndexToActionCreator(gameIncrementPlayer, index)());
+      },
+      onSubstractHandler() {
+        dispatch(bindIndexToActionCreator(gameDecrementPlayer, index)());
+      },
+    });
+
 export class GameAdminPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     intl: intlShape.isRequired,
@@ -36,20 +53,15 @@ export class GameAdminPage extends React.PureComponent { // eslint-disable-line 
       React.PropTypes.bool,
     ]),
     loading: PropTypes.bool,
-    onLoadGame: PropTypes.func,
-    params: PropTypes.object,
+    onLoadGame: PropTypes.func.isRequired,
+    onAddPlayer: PropTypes.func.isRequired,
+    params: PropTypes.object.isRequired,
+    notFound: PropTypes.bool,
+    dispatch: PropTypes.func,
   }
 
   componentWillMount() {
     this.props.onLoadGame(this.props.params.id);
-  }
-
-  componentWillReceiveProps(newProps) {
-    const { notFound } = newProps;
-
-    if (notFound) {
-      // not found
-    }
   }
 
   render() {
@@ -58,6 +70,12 @@ export class GameAdminPage extends React.PureComponent { // eslint-disable-line 
     if (this.props.loading) {
       return (
         <LoadingPanel />
+      );
+    }
+
+    if (this.props.notFound || this.props.game == null) {
+      return (
+        <NotFoundPage />
       );
     }
 
@@ -71,10 +89,10 @@ export class GameAdminPage extends React.PureComponent { // eslint-disable-line 
             <Buttons className="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
               <Button className="btn-info" title={formatMessage(messages.share)}><FontAwesome name="share-alt" /></Button>
               <Button className="btn-warning" title={formatMessage(messages.refresh)}><FontAwesome name="refresh" /></Button>
-              <Button className="btn-primary" title={formatMessage(messages.addPlayer)}><FontAwesome name="user-plus" /></Button>
+              <Button className="btn-primary" title={formatMessage(messages.addPlayer)} onClick={this.props.onAddPlayer}><FontAwesome name="user-plus" /></Button>
             </Buttons>
           </div>
-          <PlayerList players={this.props.game.players} />
+          <PlayerList players={this.props.game.players} playerDispatchProperties={playerDispatchProperties} dispatch={this.props.dispatch} />
         </Tab>
         <Tab eventKey={2} title={formatMessage(messages.setupTab)}>Tab 2 content</Tab>
         <Tab eventKey={3} title={formatMessage(messages.viewerTab)}>Tab 3 content</Tab>
@@ -84,9 +102,14 @@ export class GameAdminPage extends React.PureComponent { // eslint-disable-line 
   }
 }
 
+
+
 export function mapDispatchToProps(dispatch) {
   return {
     onLoadGame: (gameId) => dispatch(loadGame(gameId)),
+    onAddPlayer: () => dispatch(gameAddPlayer()),
+    onPlayerActions: playerDispatchProperties,
+    dispatch: dispatch,
   };
 }
 
