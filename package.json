@@ -1,10 +1,10 @@
 {
-  "name": "react-boilerplate",
-  "version": "3.4.0",
-  "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
+  "name": "scorekeepr",
+  "version": "0.1",
+  "description": "Keep scores and have friends watch the progression on their phone.",
   "repository": {
     "type": "git",
-    "url": "git://github.com/react-boilerplate/react-boilerplate.git"
+    "url": "git://github.com/Allov/scorekeepr.git"
   },
   "engines": {
     "npm": ">=3",
