@@ -21,7 +21,7 @@ This application will help you share and keep the score of any game where you ha
   </a>
 </div>
 
-Want to [contibute](.github/CONTIBUTING.md)?
+Want to [contibute](.github/CONTRIBUTING.md)?
 
 # todos
 
