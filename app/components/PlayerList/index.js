@@ -3,9 +3,9 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import FontAwesome from 'react-fontawesome';
 
 import Player from 'components/Player';
+import Wrapper from 'components/Wrapper';
 
 import messages from './messages';
-import Wrapper from './Wrapper';
 
 export const PlayerList = (props) => {
   let playerListtbody = null;

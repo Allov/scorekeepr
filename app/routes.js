@@ -60,6 +60,27 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/:shareId',
+      name: 'game-admin',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/GamePage/reducer'),
+          import('containers/GamePage/sagas'),
+          import('containers/GamePage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('shared-game', reducer.default);
+          injectSagas(sagas.default);
+
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

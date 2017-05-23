@@ -22,11 +22,7 @@ const initialState = fromJS({
   defaultIncrement: 1,
 });
 
-function applyIncrement(players, increment) {
-
-}
-
-function homeReducer(state = initialState, action) {
+function gameAdminReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_GAME:
       return state
@@ -67,4 +63,4 @@ function homeReducer(state = initialState, action) {
   }
 }
 
-export default homeReducer;
+export default gameAdminReducer;

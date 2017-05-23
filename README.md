@@ -19,20 +19,27 @@ This application will help you share and keep the score of any game where you ha
 
 * (done) implement redux
 * (done) rest api
+* (done) mongodb
+* (in progress) viewer's view using the shareId
+  * needs refactoring, did this too quickly
 * (in progress) update score (counter and hard set)
+  * rough is made, need to update player name and hard set the score
 * (in progress) general error handling
+  * need to centralize this stuff in the App container
+* (in progress) general github setup
+  * build statuses
+    * travis works
+    * coveralls.io is set, but doesn't seem to pickup the repo... to investigate
+  * create issues as work items (use trello?)
 * dev mode (log and stuff)
   * log to file (prod)
 * global loading solution
+  * use App container (progress bar)
 * reset scores
 * reset game
 * remove a player (edit mode)
 * tabs should create history to use browser back feature
-* mongodb
 * websockets for viewers
-* general github setup
-  * build statuses
-  * create issues as work items (use trello?)
 
 ## general ideas
 
@@ -111,9 +118,17 @@ This application will help you share and keep the score of any game where you ha
 ## general site structure
 
 / --> home, create game and list popular games or latest created public games
+/{shareId} --> game screen (view mode) should redirect to /games/{id} ?
 /games --> list of games sorted by popularity, created date or activity
 /games/{id} --> game screen (viewer mode)
 /games/{id}/admin --> admin mode (for game with user accounts)
 /games/{id}/admin/{secret} --> admin mode (for game without user accounts)
 /me --> my account
 /me/games --> my games (remove and create)
+
+## questions
+
+* is there a better way to handle actions in an array? see [bindIndexToActionCreator](http://blog.scottlogic.com/2016/05/19/redux-reducer-arrays.html)
+* how to load content from an url change? I'm using componentWillMount, but is there a way to do this even before that?
+* actions for every button or manage a bigger slice of the state and update it at once?
+

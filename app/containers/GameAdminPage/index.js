@@ -6,6 +6,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { bindIndexToActionCreator } from 'utils/bindIndexToActionCreator';
 
 import { injectIntl, intlShape } from 'react-intl';
 import { Tabs, Tab, Button } from 'react-bootstrap';
@@ -28,11 +29,6 @@ const GameTitle = styled.h1`
   padding-left: 10px;
   font-weight: bold;
 `;
-
-export const bindIndexToActionCreator =
-  (actionCreator, index) =>
-    (...args) =>
-      Object.assign(actionCreator(...args), { index });
 
 const playerDispatchProperties =
   (index) =>
@@ -109,7 +105,7 @@ export function mapDispatchToProps(dispatch) {
     onLoadGame: (gameId) => dispatch(loadGame(gameId)),
     onAddPlayer: () => dispatch(gameAddPlayer()),
     onPlayerActions: playerDispatchProperties,
-    dispatch: dispatch,
+    dispatch,
   };
 }
 

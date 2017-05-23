@@ -12,15 +12,16 @@ const StyledInput = styled(Input)`
 
 export const Player = (props) => (
   <tr>
-    <td><StyledInput placeholder={props.placeholder} /></td>
-    <td><Button className="btn-success pull-left" onClick={props.onAddHandler}><FontAwesome name="plus-circle" /></Button></td>
-    <td><Button className="btn-danger pull-left" onClick={props.onSubstractHandler}><FontAwesome name="minus-circle" /></Button></td>
-    <td><Count className="pull-left" value={props.player.score} onValueChangedHandler={props.onValueChangedHandler} /></td>
+    <td><StyledInput placeholder={props.placeholder} value={props.player.name} onChange={props.onPlayerNameChanged} /></td>
+    <td className="text-center"><Button className="btn-success" onClick={props.onAddHandler}><FontAwesome name="plus-circle" /></Button></td>
+    <td className="text-center"><Button className="btn-danger" onClick={props.onSubstractHandler}><FontAwesome name="minus-circle" /></Button></td>
+    <td className="text-center"><Count value={props.player.score} onValueChangedHandler={props.onValueChangedHandler} /></td>
   </tr>
 );
 
 Player.propTypes = {
   player: PropTypes.object.isRequired,
+  onPlayerNameChanged: PropTypes.func,
   onAddHandler: PropTypes.func,
   onSubstractHandler: PropTypes.func,
   onValueChangedHandler: PropTypes.func,

@@ -4,7 +4,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import { scorekeeprApiBaseUrl } from 'utils/globalConfig';
 import request from 'utils/request';
 
-import { gameLoaded, gameNotFound, gameLoadingError } from './actions';
+import { gameLoaded, gameNotFound, gameLoadingError, loadGame as loadGameAction } from './actions';
 import { LOAD_GAME, ADD_PLAYER, INCREMENT_PLAYER, DECREMENT_PLAYER } from './constants';
 
 import { makeSelectGameId, makeSelectGame } from './selectors';
@@ -53,6 +53,8 @@ export function* updateGame() {
       method: 'PUT',
       body: JSON.stringify(game),
     });
+
+    yield put(loadGameAction(game.id));
   } catch (err) {
     handleError(err);
   }

@@ -3,6 +3,7 @@ const sillyname = require('sillyname');
 const connection = require('../database');
 const logger = require('../logger');
 
+// mongoose setup
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
@@ -15,6 +16,7 @@ const GameSchema = new Schema({
 
 const Game = connection.database.model('Game', GameSchema);
 
+// helpers
 function handleGracefully(res, err, result, cb) {
   if (err) {
     res.status(500).send('Something went horribly wrong.');
@@ -37,7 +39,14 @@ function toGameDTO(result) {
   };
 }
 
+// api
+// GET /games/:id
 const gamesById = (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    res.status(404).send('Game not found.');
+    return;
+  }
+
   Game.findById(req.params.id, (err, result) => {
     handleGracefully(res, err, result, () => {
       res.status(200)
@@ -46,7 +55,13 @@ const gamesById = (req, res) => {
   });
 };
 
+// PUT /games/:id
 const updateGame = (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    res.status(404).send('Game not found.');
+    return;
+  }
+
   Game.findById(req.params.id, (err, result) => {
     handleGracefully(res, err, result, () => {
       const payload = req.body;
@@ -59,7 +74,14 @@ const updateGame = (req, res) => {
         return;
       }
 
-      updatedResult.players = payload.players;
+      // gives players random names if none supplied
+      updatedResult.players = payload.players.map((player) => {
+        const updatedPlayer = player;
+        if (!player.name) {
+          updatedPlayer.name = sillyname();
+        }
+        return updatedPlayer;
+      });
 
       updatedResult.save();
 
@@ -68,6 +90,7 @@ const updateGame = (req, res) => {
   });
 };
 
+// POST /games
 const createGame = (req, res) => {
   const shareId = Math.random().toString(36).substring(20);
 
@@ -89,6 +112,7 @@ const createGame = (req, res) => {
     });
 };
 
+// GET /games/search-by-share/:shareId
 const searchGameByShareId = (req, res) => {
   Game.findOne({
     shareId: req.params.id,

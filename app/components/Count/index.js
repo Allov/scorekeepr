@@ -16,6 +16,10 @@ class Count extends React.Component {
   }
 
   toggleEditMode() {
+    if (this.props.disableEditMode) {
+      return;
+    }
+
     this.setState({
       editMode: !this.state.editMode,
     });
@@ -51,6 +55,7 @@ class Count extends React.Component {
 Count.propTypes = {
   value: PropTypes.number.isRequired,
   onValueChangedHandler: PropTypes.func,
+  disableEditMode: PropTypes.bool,
 };
 
 export default Count;
