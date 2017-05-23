@@ -127,6 +127,7 @@ Want to [contibute](.github/CONTRIBUTING.md)?
 
 ## general site structure
 
+```
 / --> home, create game and list popular games or latest created public games
 /{shareId} --> game screen (view mode) should redirect to /games/{id} ?
 /games --> list of games sorted by popularity, created date or activity
@@ -135,6 +136,7 @@ Want to [contibute](.github/CONTRIBUTING.md)?
 /games/{id}/admin/{secret} --> admin mode (for game without user accounts)
 /me --> my account
 /me/games --> my games (remove and create)
+```
 
 ## questions
 
