@@ -27,11 +27,8 @@ Want to [contibute](.github/CONTRIBUTING.md)?
 
 ## next steps
 
-- [x] implement redux
-- [x] rest api
-
-
-
+* [x] implement redux
+* [x] rest api
 * [x] mongodb
 * [ ] viewer's view using the shareId
   * needs refactoring, did this too quickly
