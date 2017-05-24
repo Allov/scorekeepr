@@ -35,7 +35,7 @@ test_script:
   - node --version
   - node ./internals/scripts/generate-templates-for-linting
   # run tests and run build
-  - yarn run test:coverage
+  - yarn run test
   - yarn run build
 
 # Cache node_modules for faster builds
