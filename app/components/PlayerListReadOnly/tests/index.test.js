@@ -2,7 +2,7 @@ import React from 'react';
 import { IntlProvider, FormattedMessage } from 'react-intl';
 import { mount } from 'enzyme';
 
-import PlayerList from '../index';
+import PlayerListReadOnly from '../index';
 import messages from '../messages';
 
 const players = [
@@ -17,27 +17,25 @@ const players = [
   },
 ];
 
-const playerDispatchProperties = () => () => {};
-
-describe('<PlayerList />', () => {
+describe('<PlayerListReadOnlyReadOnly />', () => {
   it('should render the page message', () => {
     const renderedComponent = mount(
       <IntlProvider locale="en">
-        <PlayerList playerDispatchProperties={playerDispatchProperties} />
+        <PlayerListReadOnly />
       </IntlProvider>
     );
     expect(renderedComponent.contains(
-      <FormattedMessage {...messages.add} />
+      <FormattedMessage {...messages.playersEmpty} />
     )).toEqual(true);
   });
 
   it('should render 1 or more player', () => {
     const renderedComponent = mount(
       <IntlProvider locale="en">
-        <PlayerList players={players} playerDispatchProperties={playerDispatchProperties} />
+        <PlayerListReadOnly players={players} />
       </IntlProvider>
     );
 
-    expect(renderedComponent.find('input').length).toBeGreaterThan(0);
+    expect(renderedComponent.find('tbody').length).toBeGreaterThan(0);
   });
 });

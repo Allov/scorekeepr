@@ -41,15 +41,15 @@ Want to [contibute](.github/CONTRIBUTING.md)?
     * travis works
     * coveralls.io is set, but doesn't seem to pickup the repo... to investigate
   * create issues as work items (use trello?)
-* dev mode (log and stuff)
+* [ ] dev mode (log and stuff)
   * log to file (prod)
-* global loading solution
+* [ ] global loading solution
   * use App container (progress bar)
-* reset scores
-* reset game
-* remove a player (edit mode)
-* tabs should create history to use browser back feature
-* websockets for viewers
+* [ ] reset scores
+* [ ] reset game
+* [ ] remove a player (edit mode)
+* [ ] tabs should create history to use browser back feature
+* [ ] websockets for viewers
 
 ## general ideas
 

@@ -98,8 +98,6 @@ export class GameAdminPage extends React.PureComponent { // eslint-disable-line 
   }
 }
 
-
-
 export function mapDispatchToProps(dispatch) {
   return {
     onLoadGame: (gameId) => dispatch(loadGame(gameId)),

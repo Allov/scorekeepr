@@ -10,7 +10,7 @@ export function loadSharedGame(shareId) {
 export function sharedGameLoaded(game) {
   return {
     type: LOAD_SHARED_GAME_SUCCESS,
-    game
+    game,
   };
 }
 

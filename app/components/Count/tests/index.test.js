@@ -27,4 +27,18 @@ describe('<Count />', () => {
     const renderedComponent = renderComponent({ value: 0 });
     expect(renderedComponent.find('p').prop('className')).toMatch(/[^(text\-danger|text\-success)]/);
   });
+
+  it('should enter edit mode when clicking on the text', () => {
+    const renderedComponent = renderComponent({ value: 0 });
+    renderedComponent.find('p').simulate('click');
+
+    expect(renderedComponent.find('input').length).toEqual(1);
+  });
+
+  it('should not enter edit mode when disableEditMode is true', () => {
+    const renderedComponent = renderComponent({ value: 0, disableEditMode: true });
+    renderedComponent.find('p').simulate('click');
+
+    expect(renderedComponent.find('input').length).toEqual(0);
+  });
 });

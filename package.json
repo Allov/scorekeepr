@@ -1,6 +1,6 @@
 {
   "name": "scorekeepr",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "Keep scores and have friends watch the progression on their phone.",
   "repository": {
     "type": "git",

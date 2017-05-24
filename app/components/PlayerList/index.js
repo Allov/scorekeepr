@@ -61,7 +61,7 @@ export const PlayerList = (props) => {
 PlayerList.propTypes = {
   players: PropTypes.array,
   intl: intlShape.isRequired,
-  playerDispatchProperties: PropTypes.func,
+  playerDispatchProperties: PropTypes.func, // eslint-disable-line react/no-unused-prop-types
   dispatch: PropTypes.func,
 };
 

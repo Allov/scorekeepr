@@ -1,8 +1,7 @@
 import React from 'react';
 import { IntlProvider } from 'react-intl';
 import { shallow } from 'enzyme';
-
-import PlayerList from 'components/PlayerList';
+import FontAwesome from 'react-fontawesome';
 
 import { GameAdminPage } from '../index';
 
@@ -22,13 +21,11 @@ describe('<GameAdminPage />', () => {
       id: 'test',
     };
 
-    const onLoadGameSpy = jest.fn();
-
     const renderedComponent = shallow(
-      <GameAdminPage intl={intl} params={params} onLoadGame={onLoadGameSpy} game={game} />
+      <GameAdminPage intl={intl} params={params} onLoadGame={() => {}} onAddPlayer={() => {}} game={game} />
     );
     expect(renderedComponent.contains(
-      <PlayerList players={game.players} />
+      <FontAwesome name="user-plus" />
     )).toEqual(true);
   });
 });

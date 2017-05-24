@@ -28,7 +28,6 @@ export class GamePage extends React.Component {
       React.PropTypes.bool,
     ]),
     loading: PropTypes.bool,
-    error: PropTypes.bool,
     onLoadSharedGame: PropTypes.func.isRequired,
     params: PropTypes.object.isRequired,
   }
@@ -51,7 +50,7 @@ export class GamePage extends React.Component {
         <Tab eventKey={1} title={formatMessage(messages.scoreTab)}>
           <div className="row">
             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-              <GameTitle>{this.props.game.name || 'my game'}</GameTitle>
+              <GameTitle>{this.props.game.name}</GameTitle>
             </div>
           </div>
           <PlayerListReadOnly players={this.props.game.players} />
