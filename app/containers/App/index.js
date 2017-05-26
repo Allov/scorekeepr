@@ -10,8 +10,9 @@ import FontAwesome from 'react-fontawesome';
 import LoadingPanel from 'components/LoadingPanel';
 import NotFound from 'containers/NotFoundPage';
 
-import messages from './messages';
+import { dismissError } from './actions';
 import { makeSelectLoading, makeSelectError, makeSelectNotFound } from './selectors';
+import messages from './messages';
 
 export class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -20,6 +21,7 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
     intl: intlShape.isRequired,
     loading: PropTypes.bool,
     notFound: PropTypes.bool,
+    onDismiss: PropTypes.func,
     error: PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.bool,
@@ -36,7 +38,7 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
 
     let errorAlert = null;
     if (this.props.error) {
-      errorAlert = <Alert bsStyle="danger"> <FormattedMessage {...messages.error} /></Alert>;
+      errorAlert = <Alert bsStyle="danger" onDismiss={this.props.onDismiss} > <FormattedMessage {...messages.error} /></Alert>;
     }
 
     let content = (
@@ -59,7 +61,7 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
         <Navbar bsStyle="inverse">
           <Navbar.Header>
             <Navbar.Brand>
-              <Link to="/" title={messages.header}><FontAwesome name="gamepad" /> <FormattedMessage {...messages.header} /></Link>
+              <Link to="/" title={formatMessage(messages.header)}><FontAwesome name="gamepad" /> <FormattedMessage {...messages.header} /></Link>
             </Navbar.Brand>
           </Navbar.Header>
         </Navbar>
@@ -67,9 +69,12 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
         {content}
         <footer className="footer">
           <div className="container">
-            <p className="text-right">
-              <a href="https://github.com/allov/scorekeepr.io" title={formatMessage(messages.github)}><FontAwesome name="github" size="2x" /></a>
-              <a href="https://twitter.com/ScorekeeprIO" title={formatMessage(messages.twitter)}><FontAwesome name="twitter" size="2x" /></a>
+            <p className="pull-left">
+              <Link to="/terms-and-conditions" title={formatMessage(messages.termsAndConditions)}> <FormattedMessage {...messages.termsAndConditions} /> </Link>
+            </p>
+            <p className="text-right pull-right">
+              <a href="https://github.com/allov/scorekeepr.io" target="_blank" title={formatMessage(messages.github)}><FontAwesome name="github" size="2x" /></a>
+              <a href="https://twitter.com/ScorekeeprIO" target="_blank" title={formatMessage(messages.twitter)}><FontAwesome name="twitter" size="2x" /></a>
             </p>
           </div>
         </footer>
@@ -78,10 +83,16 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
   }
 }
 
+export function mapDispatchToProps(dispatch) {
+  return {
+    onDismiss: () => dispatch(dismissError()),
+  };
+}
+
 const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),
   error: makeSelectError(),
   notFound: makeSelectNotFound(),
 });
 
-export default connect(mapStateToProps)(injectIntl(App));
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(App));

@@ -32,20 +32,34 @@ Want to [contibute](.github/CONTRIBUTING.md)?
 * [x] mongodb
 * [x] general error handling
 * [x] global loading solution
+* [x] general github setup
 * [ ] viewer's view using the shareId
-  * needs refactoring, did this too quickly
-* [ ] update score (counter and hard set)
-  * rough is made, need to update player name and hard set the score
-* [ ] general github setup
-  * build statuses
-    * travis works
-    * coveralls.io is set, but doesn't seem to pickup the repo... to investigate
-  * create issues as work items (use trello?)
+  * [ ] handle error and loading with App actions
+  * [ ] Add Share button
+  * [ ] shared game URL shouldn't be at the root (do /g/{shareId} instead or something)
+* [ ] Game Admin
+  * [ ] reset scores
+  * [ ] update score (fix input)
+  * [ ] update name
+  * [ ] when adding a player, a sillyname should be generated (using api or client side?)
+  * [ ] review the sagas to simplify functions (can these be merged?)
+  * [ ] edit player list mode (to remove a player)
+* [ ] Game Admin - Setup
+  * [ ] reset game (clear player)
+  * [ ] change default increment (is this really needed?)
+  * [ ] change game name
+  * [ ] set public and private game
+* [ ] General UI (nav & footer)
+  * [ ] Menu (account, my games, etc.)
+  * [ ] Terms and conditions in footer (create page)
+* [ ] Genral API
+  * [ ] Supply a random userId (token?) to prevent random people doing admin mode (not really secure)
+  * [ ] oauth2 (facebook & google)
+* [ ] Game API
+  * [ ] view my games (with login)
 * [ ] dev mode (log and stuff)
-  * log to file (prod)
-* [ ] reset scores
-* [ ] reset game
-* [ ] remove a player (edit mode)
+  * [x] log to console
+  * [ ] log to file (prod)
 * [ ] tabs should create history to use browser back feature
 * [ ] websockets for viewers
 

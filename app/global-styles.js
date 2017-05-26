@@ -29,6 +29,10 @@ injectGlobal`
         margin: 10px;
       }
 
+      a:hover {
+        color: #dba27d;
+      }
+
       p {
         margin-top: 12px;
       }

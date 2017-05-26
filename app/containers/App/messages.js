@@ -10,6 +10,10 @@ export default defineMessages({
     id: 'app.components.App.header',
     defaultMessage: 'scorekeepr',
   },
+  termsAndConditions: {
+    id: 'app.components.App.termsAndConditions',
+    defaultMessage: 'Terms and conditions',
+  },
   github: {
     id: 'app.components.App.github',
     defaultMessage: 'Follow us on github',

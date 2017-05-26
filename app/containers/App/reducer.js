@@ -4,6 +4,7 @@ import {
   LOADING,
   LOADING_SUCCESS,
   ERROR,
+  DISMISS_ERROR,
   NOT_FOUND,
 } from './constants';
 
@@ -18,11 +19,15 @@ function appReducer(state = initialState, action) {
   switch (action.type) {
     case LOADING:
       return state.set('loading', true);
+    case LOADING_SUCCESS:
+      return state
+        .set('loading', false)
+        .set('error', false);
     case ERROR:
       return state
         .set('loading', false)
         .set('error', action.errorMessage);
-    case LOADING_SUCCESS:
+    case DISMISS_ERROR:
       return state
         .set('loading', false)
         .set('error', false);

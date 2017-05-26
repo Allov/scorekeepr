@@ -12,14 +12,8 @@ const makeSelectHomeCreating = () => createSelector(
   (state) => state.get('creating')
 );
 
-const makeSelectHomeError = () => createSelector(
-  selectHome,
-  (state) => state.get('error')
-);
-
 export {
   selectHome,
   makeSelectGameId,
   makeSelectHomeCreating,
-  makeSelectHomeError,
 };

@@ -17,18 +17,13 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import { browserHistory } from 'react-router';
 
-import { makeSelectGameId, makeSelectHomeCreating, makeSelectHomeError } from './selectors';
+import { makeSelectGameId, makeSelectHomeCreating } from './selectors';
 import { createGame } from './actions';
 import messages from './messages';
 
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     intl: intlShape.isRequired,
-    loading: PropTypes.bool,
-    error: React.PropTypes.oneOfType([
-      React.PropTypes.object,
-      React.PropTypes.bool,
-    ]),
     onCreateGame: PropTypes.func,
   }
 
@@ -43,17 +38,11 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
   render() {
     const { formatMessage } = this.props.intl;
 
-    let error = null;
-    if (this.props.error) {
-      error = <p className="text-danger">Oops... Something went wrong!</p>;
-    }
-
     return (
       <div className="jumbotron text-center">
         <h1><FormattedMessage {...messages.header} /></h1>
         <p><FormattedMessage {...messages.description} /></p>
-        <Button bsStyle="primary" disabled={this.props.loading} title={formatMessage(messages.create)} onClick={this.props.onCreateGame}><FormattedMessage {...messages.create} /></Button>
-        {error}
+        <Button bsStyle="primary" title={formatMessage(messages.create)} onClick={this.props.onCreateGame}><FormattedMessage {...messages.create} /></Button>
       </div>
     );
   }
@@ -67,7 +56,6 @@ export function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = createStructuredSelector({
   loading: makeSelectHomeCreating(),
-  error: makeSelectHomeError(),
   gameId: makeSelectGameId(),
 });
 

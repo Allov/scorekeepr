@@ -1,13 +1,20 @@
 import {
   LOADING,
-  ERROR,
-  NOT_FOUND,
   LOADING_SUCCESS,
+  ERROR,
+  DISMISS_ERROR,
+  NOT_FOUND,
 } from './constants';
 
 export function loading() {
   return {
     type: LOADING,
+  };
+}
+
+export function loadingSuccess() {
+  return {
+    type: LOADING_SUCCESS,
   };
 }
 
@@ -18,9 +25,9 @@ export function error(errorMessage) {
   };
 }
 
-export function loadingSuccess() {
+export function dismissError() {
   return {
-    type: LOADING_SUCCESS,
+    type: DISMISS_ERROR,
   };
 }
 

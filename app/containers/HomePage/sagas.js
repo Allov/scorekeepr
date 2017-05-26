@@ -4,7 +4,8 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import { scorekeeprApiBaseUrl } from 'utils/globalConfig';
 import request from 'utils/request';
 
-import { gameCreated, gameCreateError } from './actions';
+import { gameCreated } from './actions';
+import { error } from '../App/actions';
 import { CREATE_GAME } from './constants';
 
 export function* createGame() {
@@ -17,7 +18,7 @@ export function* createGame() {
 
     yield put(gameCreated(newGame.id));
   } catch (err) {
-    yield put(gameCreateError(err));
+    yield put(error(err.message));
   }
 }
 
