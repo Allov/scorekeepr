@@ -4,19 +4,21 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import { scorekeeprApiBaseUrl } from 'utils/globalConfig';
 import request from 'utils/request';
 
-import { gameLoaded, gameNotFound, gameLoadingError, loadGame as loadGameAction } from './actions';
+import { loading, error, loadingSuccess, notFound } from '../App/actions';
+
+import { gameLoaded, loadGame as loadGameAction } from './actions';
 import { LOAD_GAME, ADD_PLAYER, INCREMENT_PLAYER, DECREMENT_PLAYER } from './constants';
 
 import { makeSelectGameId, makeSelectGame } from './selectors';
 
 function* handleError(err) {
-  console.log(err); // eslint-disable-line no-console
-
   if (err.response && err.response.status === 404) {
-    yield put(gameNotFound());
+    yield put(notFound());
+    return;
   }
 
-  yield put(gameLoadingError(err));
+  console.error(err); // eslint-disable-line no-console
+  yield put(error(err.message));
 }
 
 export function* loadGame() {
@@ -24,11 +26,13 @@ export function* loadGame() {
   const requestURL = `${scorekeeprApiBaseUrl}api/games/${gameId}`;
 
   try {
+    yield put(loading());
     const game = yield call(request, requestURL);
 
+    yield put(loadingSuccess(game));
     yield put(gameLoaded(game));
   } catch (err) {
-    handleError(err);
+    yield handleError(err);
   }
 }
 
@@ -56,7 +60,7 @@ export function* updateGame() {
 
     yield put(loadGameAction(game.id));
   } catch (err) {
-    handleError(err);
+    yield handleError(err);
   }
 }
 

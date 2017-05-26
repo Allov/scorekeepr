@@ -22,7 +22,8 @@ import { loadGame, gameAddPlayer, gameIncrementPlayer, gameDecrementPlayer } fro
 import Buttons from './Buttons';
 import messages from './messages';
 
-import { makeSelectGameId, makeSelectGame, makeSelectGameLoading, makeSelectGameNotFound } from './selectors';
+import { makeSelectGameId, makeSelectGame } from './selectors';
+import { makeSelectLoading } from '../App/selectors';
 
 const GameTitle = styled.h1`
   font-size: 16px;
@@ -108,8 +109,7 @@ export function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  loading: makeSelectGameLoading(),
-  notFound: makeSelectGameNotFound(),
+  loading: makeSelectLoading(),
   game: makeSelectGame(),
   gameId: makeSelectGameId(),
 });

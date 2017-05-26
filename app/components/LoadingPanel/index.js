@@ -1,20 +1,27 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import FontAwesome from 'react-fontawesome';
 
 const Wrapper = styled.div`
-  padding: 100px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  height: 500px;
+  height: 100%;
   display: flex;
   justify-content: center; /* align horizontal */
   align-items: center; /* align vertical */
 `;
 
-const LoadingPanel = () => (
+const LoadingPanel = (props) => (
   <Wrapper>
     <FontAwesome name="gear" size="3x" spin />
+    <span className="sr-only">{props.message}</span>
   </Wrapper>
 );
+
+LoadingPanel.propTypes = {
+  message: PropTypes.string,
+};
 
 export default LoadingPanel;

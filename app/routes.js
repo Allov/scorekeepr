@@ -61,7 +61,7 @@ export default function createRoutes(store) {
       },
     }, {
       path: '/:shareId',
-      name: 'game-admin',
+      name: 'game-viewer',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           import('containers/GamePage/reducer'),

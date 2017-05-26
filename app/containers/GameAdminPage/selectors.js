@@ -12,20 +12,8 @@ const makeSelectGame = () => createSelector(
   (state) => state.get('game').toJS(),
 );
 
-const makeSelectGameLoading = () => createSelector(
-  selectGameAdmin,
-  (state) => state.get('loading'),
-);
-
-const makeSelectGameNotFound = () => createSelector(
-  selectGameAdmin,
-  (state) => state.get('notFound'),
-);
-
 export {
   selectGameAdmin,
   makeSelectGameId,
   makeSelectGame,
-  makeSelectGameLoading,
-  makeSelectGameNotFound,
 };

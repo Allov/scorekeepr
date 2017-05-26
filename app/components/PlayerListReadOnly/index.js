@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import Wrapper from 'components/Wrapper';
 import Count from 'components/Count';
 
+import { desc } from 'utils';
+
 import messages from './messages';
 
 const StyledPlayerName = styled.td`
@@ -14,20 +16,11 @@ const StyledPlayerName = styled.td`
 
 export const PlayerList = (props) => {
   let playerListtbody = null;
-  const scoreComparer = (a, b) => {
-    if (a.score < b.score) {
-      return 1;
-    } else if (a.score > b.score) {
-      return -1;
-    }
-
-    return 0;
-  };
 
   if (props.players && props.players.length > 0) {
     playerListtbody = (
       <tbody>
-        {props.players.sort(scoreComparer).map((player, i) => (
+        {props.players.sort(desc).map((player, i) => (
           <tr key={`player-${i}`}>
             <StyledPlayerName>{player.name}</StyledPlayerName>
             <td className="text-center"><Count value={player.score} disableEditMode /></td>

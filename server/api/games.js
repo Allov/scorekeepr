@@ -49,8 +49,10 @@ const gamesById = (req, res) => {
 
   Game.findById(req.params.id, (err, result) => {
     handleGracefully(res, err, result, () => {
-      res.status(200)
-        .json(toGameDTO(result));
+      setTimeout(() => {
+        res.status(200)
+          .json(toGameDTO(result));
+      }, 4000);
     });
   });
 };

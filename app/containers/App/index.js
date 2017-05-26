@@ -1,33 +1,58 @@
-/**
- *
- * App.react.js
- *
- * This component is the skeleton around the actual pages, and should only
- * contain code that should be seen on all pages. (e.g. navigation bar)
- *
- * NOTE: while this component should technically be a stateless functional
- * component (SFC), hot reloading does not currently support SFCs. If hot
- * reloading is not a necessity for you then you can refactor it and remove
- * the linting exception.
- */
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
-import React from 'react';
 import { Link } from 'react-router';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { Navbar } from 'react-bootstrap';
+import { Navbar, Alert } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 
-import messages from './messages';
+import LoadingPanel from 'components/LoadingPanel';
+import NotFound from 'containers/NotFoundPage';
 
-class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+import messages from './messages';
+import { makeSelectLoading, makeSelectError, makeSelectNotFound } from './selectors';
+
+export class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
-    children: React.PropTypes.node,
+    children: PropTypes.node,
     intl: intlShape.isRequired,
+    loading: PropTypes.bool,
+    notFound: PropTypes.bool,
+    error: PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.bool,
+    ]),
   };
 
   render() {
     const { formatMessage } = this.props.intl;
+
+    let loading = null;
+    if (this.props.loading) {
+      loading = <LoadingPanel message={formatMessage(messages.loading)} />;
+    }
+
+    let errorAlert = null;
+    if (this.props.error) {
+      errorAlert = <Alert bsStyle="danger"> <FormattedMessage {...messages.error} /></Alert>;
+    }
+
+    let content = (
+      <div className="container">
+        {React.Children.toArray(this.props.children)}
+        {loading}
+      </div>
+    );
+
+    if (this.props.notFound) {
+      content = (
+        <div className="container">
+          <NotFound />
+        </div>
+      );
+    }
 
     return (
       <div>
@@ -38,9 +63,8 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
             </Navbar.Brand>
           </Navbar.Header>
         </Navbar>
-        <div className="container">
-          {React.Children.toArray(this.props.children)}
-        </div>
+        {errorAlert}
+        {content}
         <footer className="footer">
           <div className="container">
             <p className="text-right">
@@ -54,4 +78,10 @@ class App extends React.PureComponent { // eslint-disable-line react/prefer-stat
   }
 }
 
-export default injectIntl(App);
+const mapStateToProps = createStructuredSelector({
+  loading: makeSelectLoading(),
+  error: makeSelectError(),
+  notFound: makeSelectNotFound(),
+});
+
+export default connect(mapStateToProps)(injectIntl(App));

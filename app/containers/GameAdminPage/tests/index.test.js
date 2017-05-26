@@ -3,7 +3,8 @@ import { IntlProvider } from 'react-intl';
 import { shallow } from 'enzyme';
 import FontAwesome from 'react-fontawesome';
 
-import { GameAdminPage } from '../index';
+import { GameAdminPage, mapDispatchToProps } from '../index';
+import { loadGame } from '../actions';
 
 const game = {
   id: 'dont-care',
@@ -27,5 +28,23 @@ describe('<GameAdminPage />', () => {
     expect(renderedComponent.contains(
       <FontAwesome name="user-plus" />
     )).toEqual(true);
+  });
+
+  describe('mapDispatchToProps', () => {
+    describe('onLoadGame', () => {
+      it('should be injected', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        expect(result.onLoadGame).toBeDefined();
+      });
+
+      it('should dispatch loadGame when called', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        const gameId = 'dont-care';
+        result.onLoadGame(gameId);
+        expect(dispatch).toHaveBeenCalledWith(loadGame(gameId));
+      });
+    });
   });
 });

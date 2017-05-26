@@ -18,4 +18,12 @@ export default defineMessages({
     id: 'app.components.App.twitter',
     defaultMessage: 'Follow us on twitter',
   },
+  error: {
+    id: 'app.components.App.error',
+    defaultMessage: 'Something went horribly wrong =(',
+  },
+  loading: {
+    id: 'app.components.App.loading',
+    defaultMessage: 'Loading, hang tight!',
+  },
 });
