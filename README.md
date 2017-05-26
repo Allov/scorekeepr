@@ -30,12 +30,12 @@ Want to [contibute](.github/CONTRIBUTING.md)?
 * [x] implement redux
 * [x] rest api
 * [x] mongodb
+* [x] general error handling
+* [x] global loading solution
 * [ ] viewer's view using the shareId
   * needs refactoring, did this too quickly
 * [ ] update score (counter and hard set)
   * rough is made, need to update player name and hard set the score
-* [ ] general error handling
-  * need to centralize this stuff in the App container
 * [ ] general github setup
   * build statuses
     * travis works
@@ -43,8 +43,6 @@ Want to [contibute](.github/CONTRIBUTING.md)?
   * create issues as work items (use trello?)
 * [ ] dev mode (log and stuff)
   * log to file (prod)
-* [ ] global loading solution
-  * use App container (progress bar)
 * [ ] reset scores
 * [ ] reset game
 * [ ] remove a player (edit mode)
