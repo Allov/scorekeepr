@@ -6,6 +6,7 @@ import {
   loadingSuccess,
   error,
   notFound,
+  dismissError,
 } from '../actions';
 
 describe('appReducer', () => {
@@ -54,5 +55,13 @@ describe('appReducer', () => {
       .set('notFound', true);
 
     expect(appReducer(state, notFound())).toEqual(expectedResult);
+  });
+
+  it('should handle the dismissError action correctly', () => {
+    const expectedResult = state
+      .set('loading', false)
+      .set('error', false);
+
+    expect(appReducer(state, dismissError())).toEqual(expectedResult);
   });
 });

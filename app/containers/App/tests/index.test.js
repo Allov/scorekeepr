@@ -5,7 +5,8 @@ import { IntlProvider, FormattedMessage } from 'react-intl';
 import LoadingPanel from 'components/LoadingPanel';
 import NotFound from 'containers/NotFoundPage';
 
-import { App } from '../index';
+import { App, mapDispatchToProps } from '../index';
+import { dismissError } from '../actions';
 import messages from '../messages';
 
 describe('<App />', () => {
@@ -61,5 +62,22 @@ describe('<App />', () => {
       <App intl={intl} notFound />
     );
     expect(renderedComponent.contains(<NotFound />)).toBe(true);
+  });
+
+  describe('mapDispatchToProps', () => {
+    describe('onDismissError', () => {
+      it('should be injected', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        expect(result.onDismissError).toBeDefined();
+      });
+
+      it('should dispatch loadGame when called', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        result.onDismissError();
+        expect(dispatch).toHaveBeenCalledWith(dismissError());
+      });
+    });
   });
 });

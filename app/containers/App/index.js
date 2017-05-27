@@ -21,7 +21,7 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
     intl: intlShape.isRequired,
     loading: PropTypes.bool,
     notFound: PropTypes.bool,
-    onDismiss: PropTypes.func,
+    onDismissError: PropTypes.func,
     error: PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.bool,
@@ -38,7 +38,7 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
 
     let errorAlert = null;
     if (this.props.error) {
-      errorAlert = <Alert bsStyle="danger" onDismiss={this.props.onDismiss} > <FormattedMessage {...messages.error} /></Alert>;
+      errorAlert = <Alert bsStyle="danger" onDismiss={this.props.onDismissError} > <FormattedMessage {...messages.error} /></Alert>;
     }
 
     let content = (
@@ -85,7 +85,7 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onDismiss: () => dispatch(dismissError()),
+    onDismissError: () => dispatch(dismissError()),
   };
 }
 

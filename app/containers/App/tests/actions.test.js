@@ -3,6 +3,7 @@ import {
   ERROR,
   LOADING_SUCCESS,
   NOT_FOUND,
+  DISMISS_ERROR,
 } from '../constants';
 
 import {
@@ -10,6 +11,7 @@ import {
   error,
   loadingSuccess,
   notFound,
+  dismissError,
 } from '../actions';
 
 describe('App Actions', () => {
@@ -52,6 +54,16 @@ describe('App Actions', () => {
       };
 
       expect(notFound()).toEqual(expectedResult);
+    });
+  });
+
+  describe('notFound', () => {
+    it('should return the correct type', () => {
+      const expectedResult = {
+        type: DISMISS_ERROR,
+      };
+
+      expect(dismissError()).toEqual(expectedResult);
     });
   });
 });
