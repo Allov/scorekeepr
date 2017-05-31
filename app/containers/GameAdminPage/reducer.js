@@ -6,6 +6,9 @@ import {
   ADD_PLAYER,
   INCREMENT_PLAYER,
   DECREMENT_PLAYER,
+  CHANGE_PLAYER_NAME,
+  CHANGE_PLAYER_SCORE,
+  RESET_SCORES,
 } from './constants';
 
 const initialState = fromJS({
@@ -28,10 +31,19 @@ function gameAdminReducer(state = initialState, action) {
         .updateIn(['game', 'players'], (players) => players.push(fromJS({ score: 0 })));
     case INCREMENT_PLAYER:
       return state
-        .updateIn(['game', 'players'], (players) => players.update(action.index, (p) => p.set('score', p.get('score') + state.get('defaultIncrement'))));
+        .updateIn(['game', 'players'], (players) => players.update(action.index, (player) => player.set('score', player.get('score') + state.get('defaultIncrement'))));
     case DECREMENT_PLAYER:
       return state
-        .updateIn(['game', 'players'], (players) => players.update(action.index, (p) => p.set('score', p.get('score') - state.get('defaultIncrement'))));
+        .updateIn(['game', 'players'], (players) => players.update(action.index, (player) => player.set('score', player.get('score') - state.get('defaultIncrement'))));
+    case CHANGE_PLAYER_NAME:
+      return state
+        .updateIn(['game', 'players'], (players) => players.update(action.index, (player) => player.set('name', action.name)));
+    case CHANGE_PLAYER_SCORE:
+      return state
+        .updateIn(['game', 'players'], (players) => players.update(action.index, (player) => player.set('score', action.score)));
+    case RESET_SCORES:
+      return state
+        .updateIn(['game', 'players'], (players) => players.map((player) => player.set('score', 0)));
     default:
       return state;
   }

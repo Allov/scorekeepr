@@ -4,10 +4,23 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import { scorekeeprApiBaseUrl } from 'utils/globalConfig';
 import request from 'utils/request';
 
-import { loading, error, loadingSuccess, notFound } from '../App/actions';
+import {
+  loading,
+  error,
+  loadingSuccess,
+  notFound,
+} from '../App/actions';
 
-import { gameLoaded, loadGame as loadGameAction } from './actions';
-import { LOAD_GAME, ADD_PLAYER, INCREMENT_PLAYER, DECREMENT_PLAYER } from './constants';
+import { gameLoaded } from './actions';
+import {
+  LOAD_GAME,
+  ADD_PLAYER,
+  INCREMENT_PLAYER,
+  DECREMENT_PLAYER,
+  CHANGE_PLAYER_NAME,
+  CHANGE_PLAYER_SCORE,
+  RESET_SCORES,
+} from './constants';
 
 import { makeSelectGameId, makeSelectGame } from './selectors';
 
@@ -57,15 +70,21 @@ export function* updateGame() {
       method: 'PUT',
       body: JSON.stringify(game),
     });
-
-    yield put(loadGameAction(game.id));
   } catch (err) {
     yield handleError(err);
   }
 }
 
 export function* updateGameRoot() {
-  const watcher = yield takeLatest([ADD_PLAYER, INCREMENT_PLAYER, DECREMENT_PLAYER], updateGame);
+  const updateActions = [
+    ADD_PLAYER,
+    INCREMENT_PLAYER,
+    DECREMENT_PLAYER,
+    CHANGE_PLAYER_NAME,
+    CHANGE_PLAYER_SCORE,
+    RESET_SCORES,
+  ];
+  const watcher = yield takeLatest(updateActions, updateGame);
 
   // Suspend execution until location changes
   yield take(LOCATION_CHANGE);

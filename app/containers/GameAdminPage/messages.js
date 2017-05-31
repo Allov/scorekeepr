@@ -10,9 +10,9 @@ export default defineMessages({
     id: 'app.components.GameAdminPage.share',
     defaultMessage: 'Share this game on social networks',
   },
-  refresh: {
-    id: 'app.components.GameAdminPage.refresh',
-    defaultMessage: 'Refresh this game\'s score',
+  reset: {
+    id: 'app.components.GameAdminPage.reset',
+    defaultMessage: 'Reset this game\'s score',
   },
   addPlayer: {
     id: 'app.components.GameAdminPage.addPlayer',

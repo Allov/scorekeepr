@@ -17,7 +17,15 @@ import LoadingPanel from 'components/LoadingPanel';
 import PlayerList from 'components/PlayerList';
 import NotFoundPage from 'containers/NotFoundPage';
 
-import { loadGame, gameAddPlayer, gameIncrementPlayer, gameDecrementPlayer } from './actions';
+import {
+  loadGame,
+  gameAddPlayer,
+  gameIncrementPlayer,
+  gameDecrementPlayer,
+  gameChangePlayerName,
+  gameChangePlayerScore,
+  resetScores,
+} from './actions';
 
 import Buttons from './Buttons';
 import messages from './messages';
@@ -31,17 +39,6 @@ const GameTitle = styled.h1`
   font-weight: bold;
 `;
 
-const playerDispatchProperties =
-  (index) =>
-    (dispatch) => ({
-      onAddHandler() {
-        dispatch(bindIndexToActionCreator(gameIncrementPlayer, index)());
-      },
-      onSubstractHandler() {
-        dispatch(bindIndexToActionCreator(gameDecrementPlayer, index)());
-      },
-    });
-
 export class GameAdminPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     intl: intlShape.isRequired,
@@ -52,6 +49,7 @@ export class GameAdminPage extends React.PureComponent { // eslint-disable-line 
     loading: PropTypes.bool,
     onLoadGame: PropTypes.func.isRequired,
     onAddPlayer: PropTypes.func.isRequired,
+    onResetScores: PropTypes.func.isRequired,
     params: PropTypes.object.isRequired,
     notFound: PropTypes.bool,
     dispatch: PropTypes.func,
@@ -85,7 +83,7 @@ export class GameAdminPage extends React.PureComponent { // eslint-disable-line 
             </div>
             <Buttons className="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
               <Button className="btn-info" title={formatMessage(messages.share)}><FontAwesome name="share-alt" /></Button>
-              <Button className="btn-warning" title={formatMessage(messages.refresh)}><FontAwesome name="refresh" /></Button>
+              <Button className="btn-warning" title={formatMessage(messages.reset)} onClick={this.props.onResetScores}><FontAwesome name="refresh" /></Button>
               <Button className="btn-primary" title={formatMessage(messages.addPlayer)} onClick={this.props.onAddPlayer}><FontAwesome name="user-plus" /></Button>
             </Buttons>
           </div>
@@ -99,11 +97,29 @@ export class GameAdminPage extends React.PureComponent { // eslint-disable-line 
   }
 }
 
+const playerDispatchProperties =
+  (index) =>
+    (dispatch) => ({
+      onAddHandler() {
+        dispatch(bindIndexToActionCreator(gameIncrementPlayer, index)());
+      },
+      onSubstractHandler() {
+        dispatch(bindIndexToActionCreator(gameDecrementPlayer, index)());
+      },
+      onPlayerNameChanged() {
+        dispatch(bindIndexToActionCreator(gameChangePlayerName, index)());
+      },
+      onValueChangedHandler: (evt) => {
+        dispatch(bindIndexToActionCreator(gameChangePlayerScore, index)(evt.target.value));
+      },
+    });
+
 export function mapDispatchToProps(dispatch) {
   return {
     onLoadGame: (gameId) => dispatch(loadGame(gameId)),
     onAddPlayer: () => dispatch(gameAddPlayer()),
     onPlayerActions: playerDispatchProperties,
+    onResetScores: () => dispatch(resetScores()),
     dispatch,
   };
 }

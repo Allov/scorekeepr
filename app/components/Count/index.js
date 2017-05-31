@@ -43,7 +43,7 @@ class Count extends React.Component {
             {value}
           </StyledCount>
           ) : (
-            <Input type="tel" className="text-center" onBlur={this.toggleEditMode} autoFocus value={this.props.value} onChange={this.props.onValueChangedHandler} />
+            <Input className="text-center" onBlur={this.toggleEditMode} autoFocus value={this.props.value} onChange={this.props.onValueChangedHandler} />
           )
         }
       </div>
@@ -53,7 +53,7 @@ class Count extends React.Component {
 }
 
 Count.propTypes = {
-  value: PropTypes.number.isRequired,
+  value: PropTypes.string.isRequired,
   onValueChangedHandler: PropTypes.func,
   disableEditMode: PropTypes.bool,
 };

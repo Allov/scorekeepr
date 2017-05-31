@@ -4,6 +4,9 @@ import {
   ADD_PLAYER,
   INCREMENT_PLAYER,
   DECREMENT_PLAYER,
+  RESET_SCORES,
+  CHANGE_PLAYER_NAME,
+  CHANGE_PLAYER_SCORE,
 } from './constants';
 
 export function loadGame(gameId) {
@@ -35,5 +38,25 @@ export function gameIncrementPlayer() {
 export function gameDecrementPlayer() {
   return {
     type: DECREMENT_PLAYER,
+  };
+}
+
+export function resetScores() {
+  return {
+    type: RESET_SCORES,
+  };
+}
+
+export function gameChangePlayerName(name) {
+  return {
+    type: CHANGE_PLAYER_NAME,
+    name,
+  };
+}
+
+export function gameChangePlayerScore(score) {
+  return {
+    type: CHANGE_PLAYER_SCORE,
+    score,
   };
 }
