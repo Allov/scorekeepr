@@ -109,8 +109,8 @@ const playerDispatchProperties =
       onPlayerNameChanged() {
         dispatch(bindIndexToActionCreator(gameChangePlayerName, index)());
       },
-      onValueChangedHandler: (evt) => {
-        dispatch(bindIndexToActionCreator(gameChangePlayerScore, index)(evt.target.value));
+      onValueChangedHandler: (value) => {
+        dispatch(bindIndexToActionCreator(gameChangePlayerScore, index)(value));
       },
     });
 

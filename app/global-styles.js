@@ -15,6 +15,18 @@ injectGlobal`
       margin-bottom: 60px;
   }
 
+  .player-score-td {
+    width: 100px;
+
+    input {
+      font-size: 30px;
+    }
+  }
+
+  .main-container {
+    margin-bottom: 30px;
+  }
+
   .footer {
       position: absolute;
       bottom: 0;

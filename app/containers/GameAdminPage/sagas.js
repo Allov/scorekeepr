@@ -1,7 +1,7 @@
 import { take, call, put, select, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
-import { scorekeeprApiBaseUrl } from 'utils/globalConfig';
+import { scorekeeprApiBaseUrl } from 'utils/global-config';
 import request from 'utils/request';
 
 import {

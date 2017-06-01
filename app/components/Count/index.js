@@ -5,19 +5,61 @@ import Input from 'components/Input';
 import StyledCount from './StyledCount';
 
 class Count extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       editMode: false,
+      value: props.value,
+      validationState: null,
     };
 
     this.toggleEditMode = this.toggleEditMode.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
-  toggleEditMode() {
+  componentWillReceiveProps(newProps) {
+    this.setState({ value: newProps.value });
+  }
+
+  onChange(evt) {
+    this.setState({ value: evt.target.value });
+  }
+
+  toggleEditMode(evt) {
     if (this.props.disableEditMode) {
       return;
+    }
+
+    if (this.state.editMode) {
+      let inputValue = evt.target.value;
+      const addMode = (inputValue && inputValue.substr(0, 1) === '+');
+      const mulMode = (inputValue && inputValue.substr(0, 1) === '*');
+      const divMode = (inputValue && inputValue.substr(0, 1) === '/');
+
+      if (addMode || mulMode || divMode) {
+        inputValue = inputValue.substr(1);
+      }
+      const value = Number(inputValue);
+
+      if (inputValue && !Number.isNaN(value) && Number.isFinite(value)) {
+        let finalValue = Number(value);
+
+        if (addMode) {
+          finalValue = this.props.value + Number(value);
+        } else if (mulMode) {
+          finalValue = this.props.value * Number(value);
+        } else if (divMode) {
+          finalValue = this.props.value / Number(value);
+        }
+
+        this.props.onValueChangedHandler(finalValue);
+      } else {
+        this.setState({ validationState: 'error' });
+        return;
+      }
+    } else {
+      this.setState({ validationState: null });
     }
 
     this.setState({
@@ -43,7 +85,7 @@ class Count extends React.Component {
             {value}
           </StyledCount>
           ) : (
-            <Input className="text-center" onBlur={this.toggleEditMode} autoFocus value={this.props.value} onChange={this.props.onValueChangedHandler} />
+            <Input type="tel" className="text-center" onBlur={this.toggleEditMode} autoFocus value={this.state.value} onChange={this.onChange} validationState={this.state.validationState} />
           )
         }
       </div>
@@ -53,7 +95,7 @@ class Count extends React.Component {
 }
 
 Count.propTypes = {
-  value: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
   onValueChangedHandler: PropTypes.func,
   disableEditMode: PropTypes.bool,
 };

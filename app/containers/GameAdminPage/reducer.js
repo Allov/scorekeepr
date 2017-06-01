@@ -1,4 +1,5 @@
 import { fromJS } from 'immutable';
+import sillyname from 'sillyname';
 
 import {
   LOAD_GAME,
@@ -12,6 +13,7 @@ import {
 } from './constants';
 
 const initialState = fromJS({
+  name: sillyname(),
   game: {
     players: [],
   },
@@ -28,7 +30,7 @@ function gameAdminReducer(state = initialState, action) {
         .set('game', fromJS(action.game));
     case ADD_PLAYER:
       return state
-        .updateIn(['game', 'players'], (players) => players.push(fromJS({ score: 0 })));
+        .updateIn(['game', 'players'], (players) => players.push(fromJS({ name: sillyname(), score: 0 })));
     case INCREMENT_PLAYER:
       return state
         .updateIn(['game', 'players'], (players) => players.update(action.index, (player) => player.set('score', player.get('score') + state.get('defaultIncrement'))));

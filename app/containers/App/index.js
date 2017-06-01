@@ -42,7 +42,7 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
     }
 
     let content = (
-      <div className="container">
+      <div className="container main-container">
         {React.Children.toArray(this.props.children)}
         {loading}
       </div>
@@ -50,7 +50,7 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
 
     if (this.props.notFound) {
       content = (
-        <div className="container">
+        <div className="container main-container">
           <NotFound />
         </div>
       );

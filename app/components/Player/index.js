@@ -15,7 +15,7 @@ export const Player = (props) => (
     <td><StyledInput placeholder={props.placeholder} value={props.player.name} onChange={props.onPlayerNameChanged} /></td>
     <td className="text-center"><Button className="btn-success" onClick={props.onAddHandler}><FontAwesome name="plus-circle" /></Button></td>
     <td className="text-center"><Button className="btn-danger" onClick={props.onSubstractHandler}><FontAwesome name="minus-circle" /></Button></td>
-    <td className="text-center"><Count value={props.player.score} onValueChangedHandler={props.onValueChangedHandler} /></td>
+    <td className="text-center player-score-td"><Count value={props.player.score} onValueChangedHandler={props.onValueChangedHandler} /></td>
   </tr>
 );
 
