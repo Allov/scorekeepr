@@ -23,6 +23,14 @@ This application will help you share and keep the score of any game where you ha
 
 Want to [contibute](.github/CONTRIBUTING.md)?
 
+# demo
+
+## easy to use
+<img src=".github/assets/demo.gif" alt="Demo">
+
+## simple calc syntax!
+<img src=".github/assets/calc-mode.gif" alt="Simple calc syntax!">
+
 # todos
 
 ## next steps
@@ -33,17 +41,18 @@ Want to [contibute](.github/CONTRIBUTING.md)?
 * [x] general error handling
 * [x] global loading solution
 * [x] general github setup
+* [ ] Game Admin
+  * [x] reset scores
+  * [x] update score (fix input)
+  * [x] update name
+  * [x] when adding a player, a sillyname should be generated (using api or client side?)
+  * [ ] review the sagas to simplify functions (can these be merged?)
+  * [ ] edit player list mode (to remove a player)
+* [ ] websockets for viewers
 * [ ] viewer's view using the shareId
   * [ ] handle error and loading with App actions
   * [ ] Add Share button
   * [ ] shared game URL shouldn't be at the root (do /g/{shareId} instead or something)
-* [ ] Game Admin
-  * [ ] reset scores
-  * [ ] update score (fix input)
-  * [ ] update name
-  * [ ] when adding a player, a sillyname should be generated (using api or client side?)
-  * [ ] review the sagas to simplify functions (can these be merged?)
-  * [ ] edit player list mode (to remove a player)
 * [ ] Game Admin - Setup
   * [ ] reset game (clear player)
   * [ ] change default increment (is this really needed?)
@@ -61,7 +70,6 @@ Want to [contibute](.github/CONTRIBUTING.md)?
   * [x] log to console
   * [ ] log to file (prod)
 * [ ] tabs should create history to use browser back feature
-* [ ] websockets for viewers
 
 ## general ideas
 
