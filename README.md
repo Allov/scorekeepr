@@ -50,6 +50,7 @@ Want to [contibute](.github/CONTRIBUTING.md)?
   * [ ] edit player list mode (to remove a player)
 * [ ] websockets for viewers
 * [ ] viewer's view using the shareId
+  * [ ] do a redirect in express instead of the client side.
   * [ ] handle error and loading with App actions
   * [ ] Add Share button
   * [ ] shared game URL shouldn't be at the root (do /g/{shareId} instead or something)
