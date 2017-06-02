@@ -4,6 +4,9 @@ import {
   ADD_PLAYER,
   DECREMENT_PLAYER,
   INCREMENT_PLAYER,
+  CHANGE_PLAYER_NAME,
+  CHANGE_PLAYER_SCORE,
+  RESET_SCORES,
 } from '../constants';
 
 import {
@@ -12,6 +15,9 @@ import {
   gameAddPlayer,
   gameDecrementPlayer,
   gameIncrementPlayer,
+  gameChangePlayerName,
+  gameChangePlayerScore,
+  resetScores,
 } from '../actions';
 
 describe('GameAdminPage Actions', () => {
@@ -66,6 +72,40 @@ describe('GameAdminPage Actions', () => {
       };
 
       expect(gameIncrementPlayer()).toEqual(expectedResult);
+    });
+  });
+
+  describe('gameChangePlayerName', () => {
+    it('should return the correct type', () => {
+      const name = 'test';
+      const expectedResult = {
+        type: CHANGE_PLAYER_NAME,
+        name,
+      };
+
+      expect(gameChangePlayerName(name)).toEqual(expectedResult);
+    });
+  });
+
+  describe('gameChangePlayerScore', () => {
+    it('should return the correct type', () => {
+      const score = -3;
+      const expectedResult = {
+        type: CHANGE_PLAYER_SCORE,
+        score,
+      };
+
+      expect(gameChangePlayerScore(score)).toEqual(expectedResult);
+    });
+  });
+
+  describe('resetScores', () => {
+    it('should return the correct type', () => {
+      const expectedResult = {
+        type: RESET_SCORES,
+      };
+
+      expect(resetScores()).toEqual(expectedResult);
     });
   });
 });

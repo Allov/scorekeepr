@@ -79,7 +79,7 @@ export class GameAdminPage extends React.PureComponent { // eslint-disable-line 
         <Tab eventKey={1} title={formatMessage(messages.scoreTab)}>
           <div className="row">
             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-              <GameTitle>{this.props.game.name || 'my game'}</GameTitle>
+              <GameTitle>{this.props.game.name}</GameTitle>
             </div>
             <Buttons className="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
               <Button className="btn-info" title={formatMessage(messages.share)}><FontAwesome name="share-alt" /></Button>
@@ -97,7 +97,7 @@ export class GameAdminPage extends React.PureComponent { // eslint-disable-line 
   }
 }
 
-const playerDispatchProperties =
+export const playerDispatchProperties =
   (index) =>
     (dispatch) => ({
       onAddHandler() {
@@ -109,7 +109,7 @@ const playerDispatchProperties =
       onPlayerNameChanged() {
         dispatch(bindIndexToActionCreator(gameChangePlayerName, index)());
       },
-      onValueChangedHandler: (value) => {
+      onValueChangedHandler(value) {
         dispatch(bindIndexToActionCreator(gameChangePlayerScore, index)(value));
       },
     });

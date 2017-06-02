@@ -2,7 +2,7 @@
  * Test the request function
  */
 
-import request from '../request';
+import request, { parseJSON } from '../request';
 
 describe('request', () => {
   // Before each test, stub the fetch function
@@ -55,5 +55,29 @@ describe('request', () => {
           done();
         });
     });
+  });
+});
+
+describe('parseJSON', () => {
+  it('should parse JSON', () => {
+    const json = JSON.stringify({ test: 0 });
+    const parsedJson = JSON.parse(json);
+    const mockedResponse = {
+      text: () => ({ then: (cb) => cb(json) }),
+    };
+
+    const actual = parseJSON(mockedResponse);
+
+    expect(actual).toEqual(parsedJson);
+  });
+
+  it('should return null when empty', () => {
+    const mockedResponse = {
+      text: () => ({ then: (cb) => cb() }),
+    };
+
+    const actual = parseJSON(mockedResponse);
+
+    expect(actual).toEqual(null);
   });
 });
