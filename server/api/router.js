@@ -1,9 +1,9 @@
-const express = require('express');
-const logger = require('../logger');
-const connection = require('../database');
+import express from 'express';
+import logger from '../logger';
+import connection from '../database';
 
-const { index } = require('./index');
-const { gamesById, createGame, updateGame, searchGameByShareId } = require('./games');
+import { index } from './index';
+import { gamesById, createGame, updateGame } from './games';
 
 const router = express.Router();
 
@@ -20,7 +20,6 @@ router.use((req, res, next) => {
 });
 
 router.get('/games/:id', gamesById);
-router.get('/games/search-by-share/:id', searchGameByShareId);
 router.put('/games/:id', updateGame);
 router.post('/games', createGame);
 

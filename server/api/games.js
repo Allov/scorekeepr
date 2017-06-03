@@ -1,43 +1,7 @@
-const mongoose = require('mongoose');
-const sillyname = require('sillyname');
-const connection = require('../database');
-const logger = require('../logger');
-
-// mongoose setup
-const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
-
-const GameSchema = new Schema({
-  objectId: ObjectId,
-  shareId: String,
-  name: String,
-  players: Array,
-}, { timestamps: true });
-
-const Game = connection.database.model('Game', GameSchema);
-
-// helpers
-function handleGracefully(res, err, result, cb) {
-  if (err) {
-    res.status(500).send('Something went horribly wrong.');
-    logger.error(err);
-  } else if (result == null) {
-    res.status(404).send('Game was not found.');
-  } else {
-    cb();
-  }
-}
-
-function toGameDTO(result) {
-  return {
-    id: result._id, // eslint-disable-line no-underscore-dangle
-    shareId: result.shareId,
-    name: result.name,
-    players: result.players,
-    createdAt: result.createdAt,
-    updatedAt: result.updatedAt,
-  };
-}
+import mongoose from 'mongoose';
+import sillyname from 'sillyname';
+import { handleGracefully } from '../database';
+import { Game, toGameDTO } from '../models/game';
 
 // api
 // GET /games/:id
@@ -112,21 +76,8 @@ const createGame = (req, res) => {
     });
 };
 
-// GET /games/search-by-share/:shareId
-const searchGameByShareId = (req, res) => {
-  Game.findOne({
-    shareId: req.params.id,
-  }, (err, result) => {
-    handleGracefully(res, err, result, () => {
-      res.status(200)
-        .json(toGameDTO(result));
-    });
-  });
-};
-
 module.exports = {
   gamesById,
   createGame,
   updateGame,
-  searchGameByShareId,
 };

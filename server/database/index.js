@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const logger = require('../logger');
+import mongoose from 'mongoose';
+import logger from '../logger';
 
 class Connection {
   constructor() {
@@ -30,4 +30,16 @@ class Connection {
   }
 }
 
-module.exports = new Connection();
+// helpers
+export function handleGracefully(res, err, result, cb) {
+  if (err) {
+    res.status(500).send('Something went horribly wrong.');
+    logger.error(err);
+  } else if (result == null) {
+    res.status(404).send('Game was not found.');
+  } else {
+    cb();
+  }
+}
+
+export default new Connection();

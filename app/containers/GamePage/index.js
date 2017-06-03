@@ -6,13 +6,12 @@ import { injectIntl, intlShape } from 'react-intl';
 import { Tabs, Tab } from 'react-bootstrap';
 import styled from 'styled-components';
 
-import LoadingPanel from 'components/LoadingPanel';
 import PlayerListReadOnly from 'components/PlayerListReadOnly';
 
-import { loadSharedGame } from './actions';
 import messages from './messages';
 
-import { makeSelectSharedGameId, makeSelectSharedGame, makeSelectSharedGameLoading, makeSelectSharedGameLoadingError } from './selectors';
+import { loadGame } from '../GameAdminPage/actions';
+import { makeSelectGame, makeSelectGameId } from '../GameAdminPage/selectors';
 
 const GameTitle = styled.h1`
   font-size: 16px;
@@ -27,23 +26,16 @@ export class GamePage extends React.Component {
       React.PropTypes.object,
       React.PropTypes.bool,
     ]),
-    loading: PropTypes.bool,
-    onLoadSharedGame: PropTypes.func.isRequired,
+    onLoadGame: PropTypes.func.isRequired,
     params: PropTypes.object.isRequired,
   }
 
   componentWillMount() {
-    this.props.onLoadSharedGame(this.props.params.shareId);
+    this.props.onLoadGame(this.props.params.id);
   }
 
   render() {
     const { formatMessage } = this.props.intl;
-
-    if (this.props.loading) {
-      return (
-        <LoadingPanel />
-      );
-    }
 
     return (
       <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
@@ -63,15 +55,13 @@ export class GamePage extends React.Component {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onLoadSharedGame: (sharedId) => dispatch(loadSharedGame(sharedId)),
+    onLoadGame: (id) => dispatch(loadGame(id)),
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  loading: makeSelectSharedGameLoading(),
-  error: makeSelectSharedGameLoadingError(),
-  game: makeSelectSharedGame(),
-  gameId: makeSelectSharedGameId(),
+  game: makeSelectGame(),
+  gameId: makeSelectGameId(),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(GamePage));

@@ -60,19 +60,19 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      path: '/:shareId',
+      path: '/games/:id',
       name: 'game-viewer',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/GamePage/reducer'),
-          import('containers/GamePage/sagas'),
+          import('containers/GameAdminPage/reducer'),
+          import('containers/GameAdminPage/sagas'),
           import('containers/GamePage'),
         ]);
 
         const renderRoute = loadModule(cb);
 
         importModules.then(([reducer, sagas, component]) => {
-          injectReducer('shared-game', reducer.default);
+          injectReducer('game-admin', reducer.default);
           injectSagas(sagas.default);
 
           renderRoute(component);

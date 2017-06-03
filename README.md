@@ -124,6 +124,12 @@ Want to [contibute](.github/CONTRIBUTING.md)?
   * be able to setup game default structure
   * set default increment value
   * set default number of periods, phases, laps, turns, etc.
+  * have a list of template for known games
+    * get scoring schemes for games like Agricola and other board games
+    * get scoring schemes for card games (Hearts, Release!, etc.)
+    * create your own?
+    * submit scheme?
+    * scheme creator?
 * light and dark theme
 * think about landscape mode? should it be any different?
 * associate image with a player (team logo, sponsors, profile picture)
