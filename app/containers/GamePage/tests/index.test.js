@@ -4,7 +4,8 @@ import { shallow } from 'enzyme';
 
 import PlayerListReadOnly from 'components/PlayerListReadOnly';
 
-import { GamePage } from '../index';
+import { GamePage, mapDispatchToProps } from '../index';
+import { loadGame } from '../../GameAdminPage/actions';
 
 describe('<GamePage />', () => {
   it('should render the page message', () => {
@@ -16,11 +17,29 @@ describe('<GamePage />', () => {
     };
 
     const renderedComponent = shallow(
-      <GamePage intl={intl} game={game} params={{}} onLoadSharedGame={() => {}} />
+      <GamePage intl={intl} game={game} params={{}} onLoadGame={() => {}} />
     );
 
     expect(renderedComponent.contains(
       <PlayerListReadOnly players={game.players} />
     )).toEqual(true);
+  });
+
+  describe('mapDispatchToProps', () => {
+    describe('onLoadGame', () => {
+      it('should be injected', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        expect(result.onLoadGame).toBeDefined();
+      });
+
+      it('should dispatch loadGame when called', () => {
+        const dispatch = jest.fn();
+        const result = mapDispatchToProps(dispatch);
+        const gameId = 'dont-care';
+        result.onLoadGame(gameId);
+        expect(dispatch).toHaveBeenCalledWith(loadGame(gameId));
+      });
+    });
   });
 });

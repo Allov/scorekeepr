@@ -17,7 +17,7 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import { browserHistory } from 'react-router';
 
-import { makeSelectGameId, makeSelectHomeCreating } from './selectors';
+import { makeSelectGameId } from './selectors';
 import { createGame } from './actions';
 import messages from './messages';
 
@@ -55,7 +55,6 @@ export function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  loading: makeSelectHomeCreating(),
   gameId: makeSelectGameId(),
 });
 

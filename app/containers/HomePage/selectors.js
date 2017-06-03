@@ -7,13 +7,7 @@ const makeSelectGameId = () => createSelector(
   (state) => state.get('gameId')
 );
 
-const makeSelectHomeCreating = () => createSelector(
-  selectHome,
-  (state) => state.get('creating')
-);
-
 export {
   selectHome,
   makeSelectGameId,
-  makeSelectHomeCreating,
 };

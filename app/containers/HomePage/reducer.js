@@ -7,19 +7,16 @@ import {
 
 const initialState = fromJS({
   gameId: false,
-  creating: false,
 });
 
 function homeReducer(state = initialState, action) {
   switch (action.type) {
     case CREATE_GAME:
       return state
-        .set('gameId', false)
-        .set('creating', true);
+        .set('gameId', false);
     case GAME_CREATION_SUCCESS:
       return state
-        .set('gameId', action.gameId)
-        .set('creating', false);
+        .set('gameId', action.gameId);
     default:
       return state;
   }
