@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import sillyname from 'sillyname';
+import { io } from '../socket';
 import { handleGracefully } from '../database';
 import { Game, toGameDTO } from '../models/game';
 
@@ -46,6 +47,8 @@ const updateGame = (req, res) => {
         }
         return updatedPlayer;
       });
+
+      io().in(req.params.id).emit('game.update', toGameDTO(updatedResult));
 
       updatedResult.save();
 
