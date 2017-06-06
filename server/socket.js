@@ -21,8 +21,6 @@ export default function initialize(http) {
     // join the game id room
     localSocket.on('game', (id) => {
       localSocket.join(id);
-    })
+    });
   });
 }
-
-
