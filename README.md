@@ -31,6 +31,10 @@ Want to [contibute](.github/CONTRIBUTING.md)?
 ## simple calc syntax!
 <img src=".github/assets/calc-mode.gif" alt="Simple calc syntax!">
 
+# development
+
+[Trello](https://trello.com/b/PIfKz3ND)
+
 # documentation
 
 * [IDEAS](.docs/IDEAS.md)
