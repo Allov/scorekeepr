@@ -17,6 +17,7 @@ const initialState = fromJS({
     players: [],
   },
   defaultIncrement: 1,
+  lostConnection: false,
 });
 
 function gameAdminReducer(state = initialState, action) {

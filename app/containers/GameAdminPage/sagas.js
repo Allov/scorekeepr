@@ -13,6 +13,8 @@ import {
   error,
   loadingSuccess,
   notFound,
+  warn,
+  dismissWarning,
 } from '../App/actions';
 
 import { gameLoaded } from './actions';
@@ -32,6 +34,8 @@ import {
   makeSelectGameId,
   makeSelectGame,
 } from './selectors';
+
+import messages from '../App/messages';
 
 // todo extract this so other sagas can use it.
 function* handleError(err) {
@@ -123,6 +127,26 @@ function subscribe(socket) {
   return eventChannel((emit) => {
     socket.on('game.update', (game) => {
       emit(gameLoaded(game));
+    });
+
+    socket.on('reconnect', () => {
+      emit(dismissWarning());
+    });
+
+    socket.on('disconnect', () => {
+      emit(warn('Lost connection to the server!'));
+    });
+
+    socket.on('error', (errorMessage) => {
+      emit(error(errorMessage));
+    });
+
+    socket.on('connection_failed', (connectionFailedMessage) => {
+      emit(error(connectionFailedMessage));
+    });
+
+    socket.on('reconnect_failed', (reconnectFailedMessage) => {
+      emit(error(reconnectFailedMessage));
     });
 
     // todo: disconnect socket when unsubscribing (switching game?)

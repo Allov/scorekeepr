@@ -4,6 +4,8 @@ import {
   ERROR,
   DISMISS_ERROR,
   NOT_FOUND,
+  WARN,
+  DISMISS_WARNING,
 } from './constants';
 
 export function loading() {
@@ -34,5 +36,18 @@ export function dismissError() {
 export function notFound() {
   return {
     type: NOT_FOUND,
+  };
+}
+
+export function warn(warningMessage) {
+  return {
+    type: WARN,
+    warningMessage,
+  };
+}
+
+export function dismissWarning() {
+  return {
+    type: DISMISS_WARNING,
   };
 }

@@ -10,8 +10,17 @@ import FontAwesome from 'react-fontawesome';
 import LoadingPanel from 'components/LoadingPanel';
 import NotFound from 'containers/NotFoundPage';
 
-import { dismissError } from './actions';
-import { makeSelectLoading, makeSelectError, makeSelectNotFound } from './selectors';
+import {
+  dismissError,
+  dismissWarning,
+} from './actions';
+
+import {
+  makeSelectLoading,
+  makeSelectError,
+  makeSelectNotFound,
+  makeSelectWarn,
+} from './selectors';
 import messages from './messages';
 
 export class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -22,7 +31,12 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
     loading: PropTypes.bool,
     notFound: PropTypes.bool,
     onDismissError: PropTypes.func,
+    onDismissWarning: PropTypes.func,
     error: PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.bool,
+    ]),
+    warn: PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.bool,
     ]),
@@ -38,7 +52,12 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
 
     let errorAlert = null;
     if (this.props.error) {
-      errorAlert = <Alert bsStyle="danger" onDismiss={this.props.onDismissError} > <FormattedMessage {...messages.error} /></Alert>;
+      errorAlert = <Alert bsStyle="danger" onDismiss={this.props.onDismissError}><FormattedMessage {...messages.error} /></Alert>;
+    }
+
+    let warnAlert = null;
+    if (this.props.warn) {
+      warnAlert = <Alert bsStyle="warning" onDismiss={this.props.onDismissWarning}>{this.props.warn}</Alert>
     }
 
     let content = (
@@ -66,6 +85,7 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
           </Navbar.Header>
         </Navbar>
         {errorAlert}
+        {warnAlert}
         {content}
         <footer className="footer">
           <div className="container">
@@ -86,6 +106,7 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
 export function mapDispatchToProps(dispatch) {
   return {
     onDismissError: () => dispatch(dismissError()),
+    onDismissWarning: () => dispatch(dismissWarning()),
   };
 }
 
@@ -93,6 +114,7 @@ const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),
   error: makeSelectError(),
   notFound: makeSelectNotFound(),
+  warn: makeSelectWarn(),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(App));

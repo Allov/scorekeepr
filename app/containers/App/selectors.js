@@ -17,6 +17,11 @@ const makeSelectNotFound = () => createSelector(
   (globalState) => globalState.get('notFound')
 );
 
+const makeSelectWarn = () => createSelector(
+  selectGlobal,
+  (globalState) => globalState.get('warn')
+);
+
 // makeSelectLocationState expects a plain JS object for the routing state
 const makeSelectLocationState = () => {
   let prevRoutingState;
@@ -39,5 +44,6 @@ export {
   makeSelectError,
   makeSelectLoading,
   makeSelectNotFound,
+  makeSelectWarn,
   makeSelectLocationState,
 };

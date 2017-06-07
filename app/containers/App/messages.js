@@ -26,6 +26,10 @@ export default defineMessages({
     id: 'app.components.App.error',
     defaultMessage: 'Something went horribly wrong =(',
   },
+  lostConnection: {
+    id: 'app.components.App.lostConnection',
+    defaultMessage: 'Lost connection to the server!',
+  },
   loading: {
     id: 'app.components.App.loading',
     defaultMessage: 'Loading, hang tight!',
