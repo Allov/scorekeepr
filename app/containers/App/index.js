@@ -80,7 +80,7 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
         <Navbar bsStyle="inverse">
           <Navbar.Header>
             <Navbar.Brand>
-              <Link to="/" title={formatMessage(messages.header)}><FontAwesome name="gamepad" /> <FormattedMessage {...messages.header} /></Link>
+              <Link to="/" title={formatMessage(messages.header)}><FontAwesome name="gamepad" /> <FormattedMessage {...messages.header} /> <sub>alpha</sub></Link>
             </Navbar.Brand>
           </Navbar.Header>
         </Navbar>
