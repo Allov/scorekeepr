@@ -7,11 +7,16 @@ import { Tabs, Tab } from 'react-bootstrap';
 import styled from 'styled-components';
 
 import PlayerListReadOnly from 'components/PlayerListReadOnly';
+import ShareButton from 'components/ShareButton';
+
+import { scorekeeprBaseUrl } from 'utils/global-config';
 
 import messages from './messages';
 
 import { loadGame } from '../GameAdminPage/actions';
 import { makeSelectGame, makeSelectGameId } from '../GameAdminPage/selectors';
+
+import Buttons from '../GameAdminPage/Buttons';
 
 const GameTitle = styled.h1`
   font-size: 16px;
@@ -37,6 +42,8 @@ export class GamePage extends React.Component {
   render() {
     const { formatMessage } = this.props.intl;
 
+    const shareUrl = `${scorekeeprBaseUrl}g/${this.props.game.shareId}`;
+
     return (
       <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
         <Tab eventKey={1} title={formatMessage(messages.scoreTab)}>
@@ -44,6 +51,9 @@ export class GamePage extends React.Component {
             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
               <GameTitle>{this.props.game.name}</GameTitle>
             </div>
+            <Buttons className="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
+              <ShareButton id="share-game" title={formatMessage(messages.share)} shareUrl={shareUrl} />
+            </Buttons>
           </div>
           <PlayerListReadOnly players={this.props.game.players} />
         </Tab>

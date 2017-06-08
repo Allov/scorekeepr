@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import FontAwesome from 'react-fontawesome';
-import { Button } from 'react-bootstrap';
+import { Button, FormGroup } from 'react-bootstrap';
 import styled from 'styled-components';
 
 import Count from 'components/Count';
@@ -12,7 +12,11 @@ const StyledInput = styled(Input)`
 
 export const Player = (props) => (
   <tr>
-    <td><StyledInput placeholder={props.placeholder} value={props.player.name} onChange={props.onPlayerNameChanged} /></td>
+    <td>
+      <FormGroup className="pull-left">
+        <StyledInput placeholder={props.placeholder} value={props.player.name} onChange={props.onPlayerNameChanged} />
+      </FormGroup>
+    </td>
     <td className="text-center"><Button className="btn-success" onClick={props.onAddHandler}><FontAwesome name="plus-circle" /></Button></td>
     <td className="text-center"><Button className="btn-danger" onClick={props.onSubstractHandler}><FontAwesome name="minus-circle" /></Button></td>
     <td className="text-center player-score-td"><Count value={props.player.score} onValueChangedHandler={props.onValueChangedHandler} /></td>

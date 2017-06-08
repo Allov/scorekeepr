@@ -1,13 +1,13 @@
-import React, { PropTypes } from 'react';
-import { FormGroup, FormControl } from 'react-bootstrap';
+import React from 'react';
+import { FormControl } from 'react-bootstrap';
 import styled from 'styled-components';
 
 function selectAllText(evt) {
   evt.target.select();
 }
 
-const StyledFormControl = styled(FormControl)`
-  &.form-control {
+const StyledFormControl = styled(FormControl) `
+  &.form-control, &.form-control[readonly] {
     background-color: transparent;
     font-weight: bold;
     color: #fff;
@@ -30,17 +30,8 @@ const StyledFormControl = styled(FormControl)`
   }
 `;
 
-const Input = (props) => {
-  const { validationState, ...otherProps } = props;
-  return (
-    <FormGroup className="pull-left" validationState={validationState} {...otherProps}>
-      <StyledFormControl onFocus={selectAllText} {...otherProps} />
-    </FormGroup>
-  );
-};
-
-Input.propTypes = {
-  validationState: PropTypes.string,
-};
+const Input = (props) => (
+  <StyledFormControl onFocus={selectAllText} {...props} />
+);
 
 export default Input;

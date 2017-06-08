@@ -57,7 +57,7 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
 
     let warnAlert = null;
     if (this.props.warn) {
-      warnAlert = <Alert bsStyle="warning" onDismiss={this.props.onDismissWarning}>{this.props.warn}</Alert>
+      warnAlert = <Alert bsStyle="warning" onDismiss={this.props.onDismissWarning}>{this.props.warn}</Alert>;
     }
 
     let content = (

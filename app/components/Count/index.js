@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-
+import { FormGroup } from 'react-bootstrap';
 import Input from 'components/Input';
 
 import StyledCount from './StyledCount';
@@ -85,7 +85,9 @@ class Count extends React.Component {
             {value}
           </StyledCount>
           ) : (
-            <Input type="tel" className="text-center" onBlur={this.toggleEditMode} autoFocus value={this.state.value} onChange={this.onChange} validationState={this.state.validationState} />
+            <FormGroup className="pull-left" validationState={this.state.validationState}>
+              <Input type="tel" className="text-center" onBlur={this.toggleEditMode} autoFocus value={this.state.value} onChange={this.onChange} />
+            </FormGroup>
           )
         }
       </div>

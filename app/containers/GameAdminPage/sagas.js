@@ -35,8 +35,6 @@ import {
   makeSelectGame,
 } from './selectors';
 
-import messages from '../App/messages';
-
 // todo extract this so other sagas can use it.
 function* handleError(err) {
   if (err.response && err.response.status === 404) {

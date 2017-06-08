@@ -16,6 +16,9 @@ import FontAwesome from 'react-fontawesome';
 import LoadingPanel from 'components/LoadingPanel';
 import PlayerList from 'components/PlayerList';
 import NotFoundPage from 'containers/NotFoundPage';
+import ShareButton from 'components/ShareButton';
+
+import { scorekeeprBaseUrl } from 'utils/global-config';
 
 import {
   loadGame,
@@ -74,6 +77,8 @@ export class GameAdminPage extends React.PureComponent { // eslint-disable-line 
       );
     }
 
+    const shareUrl = `${scorekeeprBaseUrl}g/${this.props.game.shareId}`;
+
     return (
       <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
         <Tab eventKey={1} title={formatMessage(messages.scoreTab)}>
@@ -82,7 +87,7 @@ export class GameAdminPage extends React.PureComponent { // eslint-disable-line 
               <GameTitle>{this.props.game.name}</GameTitle>
             </div>
             <Buttons className="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
-              <Button className="btn-info" title={formatMessage(messages.share)}><FontAwesome name="share-alt" /></Button>
+              <ShareButton id="share-game" title={formatMessage(messages.share)} shareUrl={shareUrl} />
               <Button className="btn-warning" title={formatMessage(messages.reset)} onClick={this.props.onResetScores}><FontAwesome name="refresh" /></Button>
               <Button className="btn-primary" title={formatMessage(messages.addPlayer)} onClick={this.props.onAddPlayer}><FontAwesome name="user-plus" /></Button>
             </Buttons>

@@ -21,6 +21,7 @@ describe('gameAdminReducer', () => {
         players: [],
       },
       defaultIncrement: 1,
+      lostConnection: false,
     });
   });
 

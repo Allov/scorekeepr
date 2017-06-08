@@ -16,6 +16,7 @@ describe('appReducer', () => {
       loading: false,
       error: false,
       notFound: false,
+      warn: false,
     });
   });
 
