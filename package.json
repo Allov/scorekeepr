@@ -10,7 +10,7 @@
     "npm": ">=3",
     "node": ">=5"
   },
-  "author": "Max Stoiber",
+  "author": "Frédérik Charest",
   "license": "MIT",
   "scripts": {
     "analyze:clean": "rimraf stats.json",
@@ -19,15 +19,16 @@
     "extract-intl": "babel-node --presets latest,stage-0 -- ./internals/scripts/extract-intl.js",
     "npmcheckversion": "node ./internals/scripts/npmcheckversion.js",
     "preinstall": "npm run npmcheckversion",
-    "postinstall": "npm run build:dll",
     "prebuild": "npm run build:clean",
     "build": "cross-env NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress",
     "build:clean": "rimraf ./build",
     "build:dll": "node ./internals/scripts/dependencies.js",
+    "build:server":  "babel server -d build-server --presets es2015,react,stage-0",
+    "build:prod": "npm run build && npm run build:server",
     "start": "cross-env NODE_ENV=development babel-watch server --presets es2015 react stage-0",
     "start:tunnel": "cross-env NODE_ENV=development ENABLE_TUNNEL=true babel-watch server --presets es2015 react stage-0",
     "start:production": "npm run test:coverage && npm run build && npm run start:prod",
-    "start:prod": "cross-env NODE_ENV=production babel-watch server --presets es2015 react stage-0",
+    "start:prod": "cross-env NODE_ENV=production node server --presets es2015 react stage-0",
     "presetup": "npm i chalk shelljs",
     "setup": "node ./internals/scripts/setup.js",
     "postsetup": "npm run build:dll",
@@ -253,7 +254,7 @@
     "whatwg-fetch": "2.0.1"
   },
   "devDependencies": {
-    "babel-cli": "6.18.0",
+    "babel-cli": "^6.18.0",
     "babel-core": "6.21.0",
     "babel-eslint": "7.1.1",
     "babel-loader": "6.2.10",

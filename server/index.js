@@ -26,7 +26,7 @@ app.use('/api', scorekeeprApi);
 // todo: move this to another file
 const { handleGracefully } = require('./database');
 const { Game } = require('./models/game');
-const { scorekeeprApiBaseUrl } = require('../app/utils/global-config');
+const { scorekeeprApiBaseUrl } = require('./global-config');
 
 app.get('/g/:shareId', (req, res) => {
   Game.findOne({

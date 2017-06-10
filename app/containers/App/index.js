@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect';
 
 import { Link } from 'react-router';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { Navbar, Alert } from 'react-bootstrap';
+import { Navbar, Alert, Label } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 
 import LoadingPanel from 'components/LoadingPanel';
@@ -80,7 +80,7 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
         <Navbar bsStyle="inverse">
           <Navbar.Header>
             <Navbar.Brand>
-              <Link to="/" title={formatMessage(messages.header)}><FontAwesome name="gamepad" /> <FormattedMessage {...messages.header} /> <sub>alpha</sub></Link>
+              <Link to="/" title={formatMessage(messages.header)}><FontAwesome name="gamepad" /> <FormattedMessage {...messages.header} /><Label bsStyle="warning">alpha</Label></Link>
             </Navbar.Brand>
           </Navbar.Header>
         </Navbar>
