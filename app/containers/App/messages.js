@@ -24,7 +24,7 @@ export default defineMessages({
   },
   error: {
     id: 'app.components.App.error',
-    defaultMessage: 'Something went horribly wrong =(',
+    defaultMessage: 'Something went horribly wrong =( <p class="text-center"><br/><a href="https://github.com/allov/scorekeepr/issues" class="btn btn-primary" target="_blank" title="report issue">report issue</a></p>',
   },
   lostConnection: {
     id: 'app.components.App.lostConnection',

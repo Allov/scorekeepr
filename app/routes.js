@@ -81,6 +81,22 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/terms-and-conditions',
+      name: 'terms-and-conditions',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/TermsAndConditions'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([component]) => {
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

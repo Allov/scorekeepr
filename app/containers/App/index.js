@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { Link } from 'react-router';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage, injectIntl, intlShape } from 'react-intl';
 import { Navbar, Alert, Label } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 
@@ -52,7 +52,7 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
 
     let errorAlert = null;
     if (this.props.error) {
-      errorAlert = <Alert bsStyle="danger" onDismiss={this.props.onDismissError}><FormattedMessage {...messages.error} /></Alert>;
+      errorAlert = <Alert bsStyle="danger" onDismiss={this.props.onDismissError}><FormattedHTMLMessage {...messages.error} /></Alert>;
     }
 
     let warnAlert = null;
