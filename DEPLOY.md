@@ -15,6 +15,9 @@
 
 * check `global-config.js` in both server and app folder and change url accordingly.
 * `npm run build:prod`
+* update all service keys:
+  * Google Analytics in `index.html`
+  * Facebook in `index.html`
 * using WinSCP (or any sftp client), copy
   * `build/*`
   * `build-server/*`
