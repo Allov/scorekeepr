@@ -1,22 +1,32 @@
-import { take, call, put, cancel, takeLatest } from 'redux-saga/effects';
+import { take, call, put, cancel, select, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
-import { scorekeeprApiBaseUrl } from 'utils/global-config';
+import { scorekeeprBaseUrl } from 'utils/global-config';
 import request from 'utils/request';
 
 import { gameCreated } from './actions';
-import { error } from '../App/actions';
+import { error, setAuthorizationToken } from '../App/actions';
+import { makeSelectAuthorizationToken } from '../App/selectors';
 import { CREATE_GAME } from './constants';
 
 export function* createGame() {
-  const requestURL = `${scorekeeprApiBaseUrl}api/games`;
+  const requestURL = `${scorekeeprBaseUrl}api/games`;
 
   try {
+    const authorizationToken = yield select(makeSelectAuthorizationToken());
+
+    const headers = {};
+    if (authorizationToken) {
+      headers.authorization = `Bearer ${authorizationToken}`;
+    }
+
     const newGame = yield call(request, requestURL, {
       method: 'POST',
+      headers,
     });
 
     yield put(gameCreated(newGame.id));
+    yield put(setAuthorizationToken(newGame.token));
   } catch (err) {
     yield put(error(err.message));
   }

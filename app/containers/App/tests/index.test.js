@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { IntlProvider, FormattedMessage } from 'react-intl';
+import { IntlProvider, FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 
 import LoadingPanel from 'components/LoadingPanel';
 import NotFound from 'containers/NotFoundPage';
@@ -44,14 +44,14 @@ describe('<App />', () => {
     expect(renderedComponent.contains(<LoadingPanel message={formatMessage(messages.loading)} />)).toBe(true);
   });
 
-  it('should display a loading panel.', () => {
+  it('should display an error message.', () => {
     const intlProvider = new IntlProvider({ locale: 'en' }, {});
     const { intl } = intlProvider.getChildContext();
 
     const renderedComponent = shallow(
       <App intl={intl} error />
     );
-    expect(renderedComponent.contains(<FormattedMessage {...messages.error} />)).toBe(true);
+    expect(renderedComponent.contains(<FormattedHTMLMessage {...messages.error} />)).toBe(true);
   });
 
   it('should display a NotFound message', () => {

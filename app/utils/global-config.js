@@ -1,2 +1,1 @@
-export const scorekeeprApiBaseUrl = 'http://scorekeepr.net/';
-export const scorekeeprBaseUrl = 'http://scorekeepr.net/';
+export const scorekeeprBaseUrl = 'http://10.0.0.4:3000/'; // include trailing slash

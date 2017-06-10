@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import sillyname from 'sillyname';
+import uuid from 'uuid/v4';
 import { io } from '../socket';
 import { handleGracefully } from '../database';
 import { Game, toGameDTO } from '../models/game';
@@ -27,7 +28,19 @@ const updateGame = (req, res) => {
     return;
   }
 
+  if (!req.headers.authorization) {
+    res.status(401).send('Unauthorized');
+    return;
+  }
+
+  const authorizationToken = req.headers.authorization.split(' ')[1];
+
   Game.findById(req.params.id, (err, result) => {
+    if (result.adminId !== authorizationToken) {
+      res.status(403).send('Unauthorized');
+      return;
+    }
+
     handleGracefully(res, err, result, () => {
       const payload = req.body;
       const updatedResult = result;
@@ -61,10 +74,16 @@ const updateGame = (req, res) => {
 const createGame = (req, res) => {
   const shareId = Math.random().toString(36).substring(20);
 
+  let adminId = uuid();
+  if (req.headers.authorization) {
+    adminId = req.headers.authorization.split(' ')[1];
+  }
+
   const game = new Game({
     shareId: `${sillyname()}${sillyname()}`.replace(/ /g, ''),
     name: sillyname(),
     players: [],
+    adminId,
   });
 
   game.save();
@@ -76,6 +95,7 @@ const createGame = (req, res) => {
       shareId: game.shareId,
       name: game.name,
       players: game.players,
+      token: adminId,
     });
 };
 

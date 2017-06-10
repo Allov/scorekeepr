@@ -5,4 +5,5 @@ export const DISMISS_ERROR = 'scorekeepr/App/DISMISS_ERROR';
 export const NOT_FOUND = 'scorekeepr/App/NOT_FOUND';
 export const WARN = 'scorekeepr/App/WARN';
 export const DISMISS_WARNING = 'scorekeepr/App/DISMISS_WARNING';
+export const SET_AUTHORIZATION_TOKEN = 'scorekeepr/App/SET_AUTHORIZATION_TOKEN';
 export const DEFAULT_LOCALE = 'en';

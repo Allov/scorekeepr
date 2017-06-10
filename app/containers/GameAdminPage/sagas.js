@@ -3,7 +3,7 @@ import { eventChannel } from 'redux-saga';
 import { take, call, put, select, cancel, takeLatest, fork } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
-import { scorekeeprApiBaseUrl } from 'utils/global-config';
+import { scorekeeprBaseUrl } from 'utils/global-config';
 import request from 'utils/request';
 
 import io from 'socket.io-client';
@@ -35,6 +35,10 @@ import {
   makeSelectGame,
 } from './selectors';
 
+import {
+  makeSelectAuthorizationToken,
+} from '../App/selectors';
+
 // todo extract this so other sagas can use it.
 function* handleError(err) {
   if (err.response && err.response.status === 404) {
@@ -50,7 +54,7 @@ function* handleError(err) {
 // load game saga
 export function* loadGame() {
   const gameId = yield select(makeSelectGameId());
-  const requestURL = `${scorekeeprApiBaseUrl}api/games/${gameId}`;
+  const requestURL = `${scorekeeprBaseUrl}api/games/${gameId}`;
 
   try {
     yield put(loading());
@@ -76,13 +80,15 @@ export function* loadGameRoot() {
 
 export function* updateGame() {
   const game = yield select(makeSelectGame());
-  const requestURL = `${scorekeeprApiBaseUrl}api/games/${game.id}`;
+  const requestURL = `${scorekeeprBaseUrl}api/games/${game.id}`;
 
   try {
     // PUT the whole game object to the game ressource.
+    const token = yield select(makeSelectAuthorizationToken());
     yield call(request, requestURL, {
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, // eslint-disable-line quote-props
       },
       method: 'PUT',
       body: JSON.stringify(game),
@@ -112,7 +118,7 @@ export function* updateGameRoot() {
 // socket saga
 
 function connect(id) {
-  const socket = io(scorekeeprApiBaseUrl);
+  const socket = io(scorekeeprBaseUrl);
   return new Promise((resolve) => {
     socket.on('connect', () => {
       socket.emit('game', id);

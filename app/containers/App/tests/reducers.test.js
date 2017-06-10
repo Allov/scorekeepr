@@ -17,6 +17,7 @@ describe('appReducer', () => {
       error: false,
       notFound: false,
       warn: false,
+      authorizationToken: false,
     });
   });
 

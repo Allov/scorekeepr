@@ -22,6 +22,11 @@ const makeSelectWarn = () => createSelector(
   (globalState) => globalState.get('warn')
 );
 
+const makeSelectAuthorizationToken = () => createSelector(
+  selectGlobal,
+  (globalState) => globalState.get('authorizationToken')
+);
+
 // makeSelectLocationState expects a plain JS object for the routing state
 const makeSelectLocationState = () => {
   let prevRoutingState;
@@ -45,5 +50,6 @@ export {
   makeSelectLoading,
   makeSelectNotFound,
   makeSelectWarn,
+  makeSelectAuthorizationToken,
   makeSelectLocationState,
 };

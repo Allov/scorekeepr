@@ -10,6 +10,7 @@ const GameSchema = new Schema({
   shareId: String,
   name: String,
   players: Array,
+  adminId: String,
 }, { timestamps: true });
 
 export const Game = connection.database.model('Game', GameSchema);

@@ -6,6 +6,7 @@ import {
   NOT_FOUND,
   WARN,
   DISMISS_WARNING,
+  SET_AUTHORIZATION_TOKEN,
 } from './constants';
 
 export function loading() {
@@ -49,5 +50,12 @@ export function warn(warningMessage) {
 export function dismissWarning() {
   return {
     type: DISMISS_WARNING,
+  };
+}
+
+export function setAuthorizationToken(authorizationToken) {
+  return {
+    type: SET_AUTHORIZATION_TOKEN,
+    authorizationToken,
   };
 }

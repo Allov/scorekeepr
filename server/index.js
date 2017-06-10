@@ -10,6 +10,7 @@ const ngrok = (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel ? require('ngr
 const resolve = require('path').resolve;
 const bodyParser = require('body-parser');
 const app = express();
+
 app.use(bodyParser.json()); // for parsing application/json
 
 // websockets
@@ -26,14 +27,14 @@ app.use('/api', scorekeeprApi);
 // todo: move this to another file
 const { handleGracefully } = require('./database');
 const { Game } = require('./models/game');
-const { scorekeeprApiBaseUrl } = require('./global-config');
+const { scorekeeprBaseUrl } = require('./global-config');
 
 app.get('/g/:shareId', (req, res) => {
   Game.findOne({
     shareId: req.params.shareId,
   }, (err, result) => {
     handleGracefully(res, err, result, () => {
-      res.redirect(301, `${scorekeeprApiBaseUrl}games/${result._id}`); // eslint-disable-line no-underscore-dangle
+      res.redirect(301, `${scorekeeprBaseUrl}games/${result._id}`); // eslint-disable-line no-underscore-dangle
     });
   });
 });

@@ -8,6 +8,7 @@ import {
   NOT_FOUND,
   WARN,
   DISMISS_WARNING,
+  SET_AUTHORIZATION_TOKEN,
 } from './constants';
 
 // The initial state of the App
@@ -16,6 +17,7 @@ const initialState = fromJS({
   error: false,
   notFound: false,
   warn: false,
+  authorizationToken: false,
 });
 
 function appReducer(state = initialState, action) {
@@ -45,6 +47,9 @@ function appReducer(state = initialState, action) {
     case DISMISS_WARNING:
       return state
         .set('warn', false);
+    case SET_AUTHORIZATION_TOKEN:
+      return state
+        .set('authorizationToken', action.authorizationToken);
     default:
       return state;
   }
