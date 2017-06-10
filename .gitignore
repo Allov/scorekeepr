@@ -4,6 +4,7 @@ build
 build-server
 node_modules
 stats.json
+*.log
 
 # Cruft
 .DS_Store

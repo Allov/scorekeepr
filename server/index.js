@@ -39,6 +39,16 @@ app.get('/g/:shareId', (req, res) => {
   });
 });
 
+app.use((err, req, res, next) => {
+  logger.error(err.stack);
+  if (res.headersSent) {
+    next(err);
+  }
+
+  res.send(500, 'Something broke!');
+});
+
+
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
   outputPath: resolve(process.cwd(), 'build'),

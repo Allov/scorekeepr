@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+const log4js = require('./log4js').default;
 
 const chalk = require('chalk');
 const ip = require('ip');
@@ -12,11 +13,11 @@ const logger = {
 
   // Called whenever there's an error on the server we want to print
   error: (err) => {
-    console.error(`error: ${chalk.red(err)}`);
+    log4js.error(err);
   },
 
   warning: (warn) => {
-    console.warn(`warn: ${chalk.yellow(warn)}`);
+    log4js.warn(warn);
   },
 
   // Called when express.js app starts on given port w/o errors
