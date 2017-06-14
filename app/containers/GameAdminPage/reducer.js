@@ -30,7 +30,7 @@ function gameAdminReducer(state = initialState, action) {
         .set('game', fromJS(action.game));
     case ADD_PLAYER:
       return state
-        .updateIn(['game', 'players'], (players) => players.push(fromJS({ name: '', score: 0 })));
+        .updateIn(['game', 'players'], (players) => players.push(fromJS({ name: action.name, score: 0 })));
     case INCREMENT_PLAYER:
       return state
         .updateIn(['game', 'players'], (players) => players.update(action.index, (player) => player.set('score', player.get('score') + state.get('defaultIncrement'))));

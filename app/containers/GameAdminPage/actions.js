@@ -23,9 +23,10 @@ export function gameLoaded(game) {
   };
 }
 
-export function gameAddPlayer() {
+export function gameAddPlayer(name) {
   return {
     type: ADD_PLAYER,
+    name,
   };
 }
 

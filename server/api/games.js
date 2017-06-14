@@ -52,14 +52,7 @@ const updateGame = (req, res) => {
         return;
       }
 
-      // gives players random names if none supplied
-      updatedResult.players = payload.players.map((player) => {
-        const updatedPlayer = player;
-        if (!player.name) {
-          updatedPlayer.name = sillyname();
-        }
-        return updatedPlayer;
-      });
+      updatedResult.players = payload.players;
 
       io().in(req.params.id).emit('game.update', toGameDTO(updatedResult));
 

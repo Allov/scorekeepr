@@ -22,6 +22,9 @@ import {
   gameIncrementPlayer,
 } from '../actions';
 
+// mock sillyname dependency
+jest.mock('sillyname', () => () => 'dont-care');
+
 const game = {
   id: 'dont-care',
   name: 'dont-care',
@@ -106,7 +109,7 @@ describe('<GameAdminPage />', () => {
         const dispatch = jest.fn();
         const result = mapDispatchToProps(dispatch);
         result.onAddPlayer();
-        expect(dispatch).toHaveBeenCalledWith(gameAddPlayer());
+        expect(dispatch).toHaveBeenCalledWith(gameAddPlayer('dont-care'));
       });
     });
 

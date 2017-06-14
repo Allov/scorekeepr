@@ -13,6 +13,8 @@ import { Tabs, Tab, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import FontAwesome from 'react-fontawesome';
 
+import sillyname from 'sillyname';
+
 import LoadingPanel from 'components/LoadingPanel';
 import PlayerList from 'components/PlayerList';
 import NotFoundPage from 'containers/NotFoundPage';
@@ -122,7 +124,7 @@ export const playerDispatchProperties =
 export function mapDispatchToProps(dispatch) {
   return {
     onLoadGame: (gameId) => dispatch(loadGame(gameId)),
-    onAddPlayer: () => dispatch(gameAddPlayer()),
+    onAddPlayer: () => dispatch(gameAddPlayer(sillyname())),
     onPlayerActions: playerDispatchProperties,
     onResetScores: () => dispatch(resetScores()),
     dispatch,

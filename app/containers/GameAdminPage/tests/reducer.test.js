@@ -31,13 +31,14 @@ describe('gameAdminReducer', () => {
   });
 
   it('should handle the add player action correctly', () => {
+    const name = 'test';
     const expectedResult = state
       .updateIn(['game', 'players'], (players) => players.push(fromJS({
-        name: '',
+        name,
         score: 0,
       })));
 
-    expect(gameAdminReducer(state, gameAddPlayer())).toEqual(expectedResult);
+    expect(gameAdminReducer(state, gameAddPlayer(name))).toEqual(expectedResult);
   });
 
   it('should handle the game loaded action correctly', () => {
