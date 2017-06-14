@@ -9,15 +9,35 @@
 * nvm
 * mongodb >= 3.4.4
 
-## How to deploy
+## How to deploy (no package installation needed)
 
 ### On local machine
 
 * check `global-config.js` in both server and app folder and change url accordingly.
-* `npm run build:prod`
 * update all service keys:
   * Google Analytics in `index.html`
   * Facebook in `index.html`
+* `npm run build:prod`
+
+### On server machine
+
+* `forever stopall`
+* remove `build` and `server` directories
+* using WinSCP (or any sftp client), copy
+  * `build/*`
+  * `build-server/*`
+* rename `build-server` to `server`
+* `cd ~ && ./start_scorekeepr`
+
+## How to deploy (full deploy)
+
+### On local machine
+
+* check `global-config.js` in both server and app folder and change url accordingly.
+* update all service keys:
+  * Google Analytics in `index.html`
+  * Facebook in `index.html`
+* `npm run build:prod`
 * using WinSCP (or any sftp client), copy
   * `build/*`
   * `build-server/*`
