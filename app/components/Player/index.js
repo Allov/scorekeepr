@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Count from 'components/Count';
 import Input from 'components/Input';
 
-const StyledInput = styled(Input)`
+const StyledInput = styled(Input) `
   width: 100%;
 `;
 

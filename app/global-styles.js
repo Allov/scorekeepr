@@ -15,11 +15,27 @@ injectGlobal`
       margin-bottom: 60px;
   }
 
-  .player-score-td {
-    width: 100px;
+  .btn {
+    @media (max-width: 375px) {
+      font-size: 12px!important;
+    }
+  }
 
-    input {
-      font-size: 30px;
+  .player-score-td {
+    @media (max-width: 375px) {
+      width: 65px;
+      input {
+        font-size: 20px;
+        width: 50px;
+      }
+    }
+
+    @media (min-width: 376px) {
+      width: 85px;
+      input {
+        font-size: 30px;
+        width: 70px;
+      }
     }
   }
 

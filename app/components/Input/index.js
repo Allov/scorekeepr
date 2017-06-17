@@ -15,6 +15,7 @@ const StyledFormControl = styled(FormControl) `
     border-top-color: transparent;
     border-left-color: transparent;
     border-right-color: transparent;
+    padding: 8px 0px;
 
     &:focus {
       border: 1px solid #fff;

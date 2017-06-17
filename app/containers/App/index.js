@@ -7,6 +7,8 @@ import { FormattedMessage, FormattedHTMLMessage, injectIntl, intlShape } from 'r
 import { Navbar, Alert, Label } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 
+import styled from 'styled-components';
+
 import LoadingPanel from 'components/LoadingPanel';
 import NotFound from 'containers/NotFoundPage';
 
@@ -22,6 +24,10 @@ import {
   makeSelectWarn,
 } from './selectors';
 import messages from './messages';
+
+const StyledLabel = styled(Label) `
+  background-color: #2b3e50;
+`;
 
 export class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -80,7 +86,10 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
         <Navbar bsStyle="inverse">
           <Navbar.Header>
             <Navbar.Brand>
-              <Link to="/" title={formatMessage(messages.header)}><FontAwesome name="gamepad" /> <FormattedMessage {...messages.header} /><Label bsStyle="warning">alpha</Label></Link>
+              <Link to="/" title={formatMessage(messages.header)}><FontAwesome name="gamepad" />
+                <FormattedMessage {...messages.header} />&nbsp;
+                <StyledLabel>alpha</StyledLabel>
+              </Link>
             </Navbar.Brand>
           </Navbar.Header>
         </Navbar>

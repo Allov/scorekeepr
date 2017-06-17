@@ -10,7 +10,14 @@ import { desc } from 'utils';
 import messages from './messages';
 
 const StyledPlayerName = styled.td`
-  font-size: 30px;
+  @media (max-width: 375px) {
+    font-size: 20px;
+  }
+
+  @media (min-width: 376px) {
+    font-size: 30px;
+  }
+
   font-weight: 600;
 `;
 

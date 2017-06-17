@@ -10,7 +10,6 @@ import { bindIndexToActionCreator } from 'utils/bindIndexToActionCreator';
 
 import { injectIntl, intlShape } from 'react-intl';
 import { Tabs, Tab, Button } from 'react-bootstrap';
-import styled from 'styled-components';
 import FontAwesome from 'react-fontawesome';
 
 import sillyname from 'sillyname';
@@ -19,6 +18,7 @@ import LoadingPanel from 'components/LoadingPanel';
 import PlayerList from 'components/PlayerList';
 import NotFoundPage from 'containers/NotFoundPage';
 import ShareButton from 'components/ShareButton';
+import GameTitle from 'components/GameTitle';
 
 import { scorekeeprBaseUrl } from 'utils/global-config';
 
@@ -37,12 +37,6 @@ import messages from './messages';
 
 import { makeSelectGameId, makeSelectGame } from './selectors';
 import { makeSelectLoading } from '../App/selectors';
-
-const GameTitle = styled.h1`
-  font-size: 16px;
-  padding-left: 10px;
-  font-weight: bold;
-`;
 
 export class GameAdminPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
@@ -85,10 +79,10 @@ export class GameAdminPage extends React.PureComponent { // eslint-disable-line 
       <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
         <Tab eventKey={1} title={formatMessage(messages.scoreTab)}>
           <div className="row">
-            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div className="col-xs-5 col-sm-6 col-md-6 col-lg-6">
               <GameTitle>{this.props.game.name}</GameTitle>
             </div>
-            <Buttons className="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
+            <Buttons className="col-xs-7 col-sm-6 col-md-6 col-lg-6 text-right">
               <ShareButton id="share-game" title={formatMessage(messages.share)} shareUrl={shareUrl} />
               <Button className="btn-warning" title={formatMessage(messages.reset)} onClick={this.props.onResetScores}><FontAwesome name="refresh" /></Button>
               <Button className="btn-primary" title={formatMessage(messages.addPlayer)} onClick={this.props.onAddPlayer}><FontAwesome name="user-plus" /></Button>
@@ -96,9 +90,6 @@ export class GameAdminPage extends React.PureComponent { // eslint-disable-line 
           </div>
           <PlayerList players={this.props.game.players} playerDispatchProperties={playerDispatchProperties} dispatch={this.props.dispatch} />
         </Tab>
-        <Tab eventKey={2} title={formatMessage(messages.setupTab)}>Tab 2 content</Tab>
-        <Tab eventKey={3} title={formatMessage(messages.viewerTab)}>Tab 3 content</Tab>
-        <Tab eventKey={4} title={formatMessage(messages.eventTab)}>Tab 4 content</Tab>
       </Tabs>
     );
   }

@@ -1,9 +1,17 @@
 import styled from 'styled-components';
 
 const StyledCount = styled.p`
-  font-size: 30px;
+  @media (max-width: 375px) {
+    font-size: 20px;
+    line-height: 2;
+  }
+
+  @media (min-width: 376px) {
+    font-size: 30px;
+    line-height: 1.3;
+  }
+
   font-weight: 600;
-  line-height: 1.3;
 `;
 
 export default StyledCount;
