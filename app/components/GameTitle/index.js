@@ -5,6 +5,8 @@ const GameTitle = styled.h1`
   padding-left: 10px;
   font-weight: bold;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export default GameTitle;
