@@ -7,14 +7,35 @@ import { fromJS } from 'immutable';
 import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 
-
-import { persistStore, autoRehydrate } from 'redux-persist-immutable';
-import { localForage } from 'localforage';
+import localforage from 'localforage';
+import { setAuthorizationToken } from 'containers/App/actions';
+import { SET_AUTHORIZATION_TOKEN } from 'containers/App/constants';
+import { LOAD_GAME_SUCCESS } from 'containers/GameAdminPage/constants';
 
 import createReducer from './reducers';
 
 
 const sagaMiddleware = createSagaMiddleware();
+
+// get this out so it can be tested.
+const persistAuthorizationToken = ({ dispatch }) => (next) => (action) => {
+  const nextAction = next(action);
+  if (nextAction.type === SET_AUTHORIZATION_TOKEN) {
+    localforage.setItem('authorizationToken', nextAction.authorizationToken);
+  }
+
+  if (nextAction.type === LOAD_GAME_SUCCESS) {
+    localforage
+      .getItem('authorizationToken')
+      .then((authorizationToken) => {
+        if (authorizationToken) {
+          dispatch(setAuthorizationToken(authorizationToken));
+        }
+      });
+  }
+
+  return nextAction;
+};
 
 export default function configureStore(initialState = {}, history) {
   // Create the store with two middlewares
@@ -23,11 +44,11 @@ export default function configureStore(initialState = {}, history) {
   const middlewares = [
     sagaMiddleware,
     routerMiddleware(history),
+    persistAuthorizationToken,
   ];
 
   const enhancers = [
     applyMiddleware(...middlewares),
-    autoRehydrate(),
   ];
 
   // If Redux DevTools Extension is installed use it, otherwise use Redux compose
@@ -44,11 +65,6 @@ export default function configureStore(initialState = {}, history) {
     fromJS(initialState),
     composeEnhancers(...enhancers)
   );
-
-  persistStore(store, {
-    whitelist: ['global'],
-    storage: localForage,
-  });
 
   // Extensions
   store.runSaga = sagaMiddleware.run;
