@@ -138,8 +138,9 @@ describe('<GameAdminPage />', () => {
       it('should dispatch gameChangePlayerName when called', () => {
         const dispatch = jest.fn();
         const result = mapDispatchToProps(dispatch);
-        result.onPlayerActions(0)(dispatch).onPlayerNameChanged();
-        expect(dispatch).toHaveBeenCalledWith(bindIndexToActionCreator(gameChangePlayerName, 0)());
+        const evt = { target: { value: 'test' } };
+        result.onPlayerActions(0)(dispatch).onPlayerNameChanged(evt);
+        expect(dispatch).toHaveBeenCalledWith(bindIndexToActionCreator(gameChangePlayerName, 0)(evt.target.value));
       });
 
       it('should dispatch gameChangePlayerScore when called', () => {

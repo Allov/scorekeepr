@@ -113,8 +113,8 @@ export const playerDispatchProperties =
       onSubstractHandler() {
         dispatch(bindIndexToActionCreator(gameDecrementPlayer, index)());
       },
-      onPlayerNameChanged() {
-        dispatch(bindIndexToActionCreator(gameChangePlayerName, index)());
+      onPlayerNameChanged(evt) {
+        dispatch(bindIndexToActionCreator(gameChangePlayerName, index)(evt.target.value));
       },
       onValueChangedHandler(value) {
         dispatch(bindIndexToActionCreator(gameChangePlayerScore, index)(value));
